@@ -297,9 +297,8 @@ main() {
     print_success "Installation complete!"
     print_info ""
     print_info "Next steps:"
-    print_info "1. cd $TARGET_DIR"
-    print_info "2. Update .workflow/docs/plan.md with your project details"
-    print_info "3. Start with: [ARCHITECT] Starting analysis of [your first feature]"
+    print_info ""
+    print_info "Start typing your requests..."
     print_info ""
     print_info "Happy multi-persona development! 🚀"
 }
