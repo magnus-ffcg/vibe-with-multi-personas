@@ -52,8 +52,8 @@ TEMPLATE_FILES=(
 # Function to download a single file
 download_file() {
     local repo_url="https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/"
-    local file_path="$2"
-    local target_dir="$3"
+    local file_path="$1"
+    local target_dir="$2"
     
     local raw_url=$("$repo_url$file_path")
     local target_file="$target_dir/$file_path"
@@ -73,7 +73,6 @@ download_file() {
 
 # Function to download all template files
 download_template() {
-    local repo_url="$1"
     local temp_dir="$2"
     
     print_info "Downloading template files from repository..."
@@ -82,7 +81,7 @@ download_template() {
     local failed=0
     
     for file in "${TEMPLATE_FILES[@]}"; do
-        if download_file "$repo_url" "$file" "$temp_dir"; then
+        if download_file "$file" "$temp_dir"; then
             ((downloaded++))
         else
             ((failed++))
@@ -277,7 +276,7 @@ main() {
     print_info "Temporary directory: $TEMP_DIR"
     
     # Download template files
-    if ! download_template "$GIT_RAW_URL" "$TEMP_DIR"; then
+    if ! download_template "$TEMP_DIR"; then
         print_error "Template download failed"
         exit 1
     fi
