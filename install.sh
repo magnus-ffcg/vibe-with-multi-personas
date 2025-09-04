@@ -51,12 +51,12 @@ TEMPLATE_FILES=(
 
 # Function to download a single file
 download_file() {
-    local repo_url="https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/"
+    local repo_url="https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main"
     local file_path="$1"
     local target_dir="$2"
     
     # Remove 'template/' prefix from file path for the URL
-    local relative_path="${file_path#template/}"
+    local relative_path="${file_path}"
     local raw_url="${repo_url}/${relative_path}"
     local target_file="$target_dir/$file_path"
     local target_file_dir=$(dirname "$target_file")
@@ -65,7 +65,7 @@ download_file() {
     mkdir -p "$target_file_dir"
     
     # Download file
-    if ! curl -s -f -v -L -o "$target_file" "$raw_url"; then
+    if ! curl -fsSL -o "$target_file" "$raw_url"; then
         print_warning "Failed to download: $file_path"
         return 1
     fi
@@ -83,6 +83,7 @@ download_template() {
     local failed=0
     
     for file in "${TEMPLATE_FILES[@]}"; do
+        echo $file
         if download_file "$file" "$temp_dir"; then
             ((downloaded++))
         else
