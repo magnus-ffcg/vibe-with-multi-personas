@@ -12,7 +12,6 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
-REPO_URL='https://github.com/magnus-ffcg/vibe-with-multi-personas.git'
 
 # Function to print colored output
 print_info() {
@@ -52,11 +51,11 @@ TEMPLATE_FILES=(
 
 # Function to download a single file
 download_file() {
-    local repo_url="$1"
+    local repo_url="https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/"
     local file_path="$2"
     local target_dir="$3"
     
-    local raw_url=$(github_to_raw_url "$repo_url" "$file_path")
+    local raw_url=$("$repo_url$file_path")
     local target_file="$target_dir/$file_path"
     local target_file_dir=$(dirname "$target_file")
     
@@ -278,7 +277,7 @@ main() {
     print_info "Temporary directory: $TEMP_DIR"
     
     # Download template files
-    if ! download_template "$REPO_URL" "$TEMP_DIR"; then
+    if ! download_template "$GIT_RAW_URL" "$TEMP_DIR"; then
         print_error "Template download failed"
         exit 1
     fi
