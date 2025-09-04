@@ -4,41 +4,49 @@ This template provides a complete multi-persona development workflow system with
 
 ## 🚀 Quick Start
 
-### Option 1: Install from GitHub (Recommended)
+### One-Line Installation (Recommended)
 ```bash
 # For Windsurf Cascade
-bash <(curl -s https://raw.githubusercontent.com/USER/REPO/main/install.sh) \
-  https://github.com/USER/REPO \
+bash <(curl -s https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/main/install.sh) \
+  https://github.com/magnus-ffcg/vibe-with-multi-personas.git \
   /path/to/your/new-project \
   "Your Project Name" \
   windsurf
 
 # For Cursor IDE
-bash <(curl -s https://raw.githubusercontent.com/USER/REPO/main/install.sh) \
-  https://github.com/USER/REPO \
+bash <(curl -s https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/main/install.sh) \
+  https://github.com/magnus-ffcg/vibe-with-multi-personas.git \
   /path/to/your/new-project \
   "Your Project Name" \
   cursor
-```
-
-### Option 2: Local Bootstrap
-```bash
-git clone https://github.com/USER/REPO.git
-cd REPO
-
-# For Windsurf Cascade
-./bootstrap.sh /path/to/your/new-project "Your Project Name" windsurf
-
-# For Cursor IDE
-./bootstrap.sh /path/to/your/new-project "Your Project Name" cursor
 
 # Auto-detect IDE (will prompt if unable to detect)
-./bootstrap.sh /path/to/your/new-project "Your Project Name"
+bash <(curl -s https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/main/install.sh) \
+  https://github.com/magnus-ffcg/vibe-with-multi-personas.git \
+  /path/to/your/new-project \
+  "Your Project Name"
 ```
 
+### Alternative: Download and Run Locally
+```bash
+# Download the installer
+curl -O https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/main/install.sh
+chmod +x install.sh
+
+# Run installation
+./install.sh https://github.com/magnus-ffcg/vibe-with-multi-personas.git /path/to/your/new-project "Your Project Name" windsurf
+```
+
+### Installation Benefits
+✅ **No Git Required** - Uses only `curl` (available on all systems)  
+✅ **Faster Setup** - Downloads only needed files (~16 files vs full repo)  
+✅ **Smaller Footprint** - ~15-20KB download vs 72KB+ with git history  
+✅ **Direct Access** - Works from any terminal without cloning  
+
 ### Next Steps
-3. **Follow the generated instructions** in your new project
-4. Start coding with multi-persona development workflow!
+1. **Run the installation command** above with your project path
+2. **Follow the generated instructions** in your new project
+3. Start coding with multi-persona development workflow!
 
 ## What You Get
 
@@ -55,6 +63,7 @@ This template provides a complete multi-persona development system with:
 
 ```
 ├── README.md                # This file - overview and quick start
+├── install.sh               # One-command installer (no git required)
 ├── .windsurf/               # Windsurf Cascade IDE configuration
 │   └── rules/
 │       ├── personas.md      # Windsurf-specific persona definitions
@@ -77,14 +86,12 @@ This template provides a complete multi-persona development system with:
 │   ├── changelog.md         # Implementation changes
 │   ├── dependencies.md      # External dependencies
 │   └── glossary.md          # Project terminology
-├── template/                # Clean template for new projects
-│   ├── .windsurf/           # Windsurf configuration template
-│   ├── .cursor/             # Cursor configuration template
-│   ├── .workflow/           # Core workflow documentation
-│   ├── docs/                # Project documentation structure
-│   └── README.md            # Project-specific README template
-├── bootstrap.sh             # Automated project setup script
-└── install.sh               # GitHub installation script
+└── template/                # Clean template for new projects
+    ├── windsurf/            # Windsurf configuration template
+    ├── cursor/              # Cursor configuration template
+    ├── workflow/            # Core workflow documentation
+    ├── docs/                # Project documentation structure
+    └── README.md            # Project-specific README template
 ```
 
 ## IDE-Specific Features
