@@ -258,17 +258,16 @@ main() {
     print_info "Multi-Persona Development Template Installer"
     print_info "============================================="
     
-    # Parse arguments
-    if [ "$1" = "windsurf" ] || [ "$1" = "cursor" ]; then
-        # One-liner format: install.sh windsurf or install.sh cursor
-        TARGET_DIR="$(pwd)"
-        TARGET_IDE="$1"
-    else
-        # Legacy format: install.sh [ide] [project_name]
-        TARGET_DIR="$(pwd)"
-        TARGET_IDE="$1"
-        PROJECT_NAME="$2"
+    # Always use current directory as target
+    TARGET_DIR="$(pwd)"
+    
+    # If first arg is a directory, shift it out
+    if [ -n "$1" ] && [ -d "$1" ]; then
+        shift
     fi
+    
+    # First argument is now always the IDE (or empty)
+    TARGET_IDE="${1:-cursor}"  # Default to cursor if not specified
     
     # Show usage if no IDE specified
     if [ -z "$TARGET_IDE" ] || ! [[ "$TARGET_IDE" =~ ^(windsurf|cursor)$ ]]; then
