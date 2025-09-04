@@ -130,9 +130,7 @@ tests/
 - Workflow states are consistent
 
 ## Test Environment
-- Python 3.12
-- pytest as testing framework
-- Coverage reporting with pytest-cov
+- Uses a testframework available for project language or framwork
 - Mock external dependencies
 
 ---

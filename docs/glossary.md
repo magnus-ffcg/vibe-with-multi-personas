@@ -2,7 +2,7 @@
 
 This document defines shared terminology used throughout the project.
 
-## Mob Programming Terms
+## Multi-personas development Terms
 
 ### Personas
 - **[ARCHITECT]**: Responsible for research, design, and task breakdown

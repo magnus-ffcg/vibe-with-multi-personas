@@ -44,7 +44,7 @@ This document defines the roles and responsibilities for our multi-persona devel
 
 ### Key Activities:
 - Implements backlog tasks following the documented design
-- Uses Python 3.12 unless otherwise specified
+- Uses project language or framework unless otherwise specified
 - Writes clean, maintainable, well-documented code
 - Makes small, focused commits with clear messages
 - Updates `/docs/changelog.md` with each change

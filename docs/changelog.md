@@ -8,7 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 2024-12-19
 
 ### Added
+- **Standalone Installer**: New bash-based installer that works without git
 - **Multi-IDE Support**: Full support for both Windsurf Cascade and Cursor IDE
+- **Testing Framework**: Comprehensive test suite for installer validation
+- **Documentation**: Detailed installation and usage instructions
+
+### Changed
+- **File Structure**: Moved IDE-specific files to hidden directories (`.windsurf`, `.cursor`)
+- **Installation Process**: Simplified installation with better error handling
+- **Cross-Platform Support**: Improved compatibility with both macOS and Linux
 - **Windsurf Cascade Features**: 
   - AI pair programming integration with Cascade context
   - Windsurf-specific workflow optimizations

@@ -20,17 +20,12 @@ This bootstrap template is designed to have **zero runtime dependencies**:
 
 When users bootstrap new projects using this template, they may add:
 
-### Python Projects (Default)
-- **Python 3.12+** - Default language specified in workflow
-- **pytest** - Testing framework (recommended)
-- **black** - Code formatting (recommended)
-- **mypy** - Type checking (recommended)
+### Projects
+- **bash+** - Default language specified in workflow
+- **bats** - Testing framework (recommended)
 
 ### Other Languages
 The template is language-agnostic and can be adapted for:
-- JavaScript/TypeScript projects
-- Java projects
-- Go projects
 - Any language with similar tooling
 
 ## Dependency Management Strategy

@@ -33,9 +33,9 @@ print_error() {
 # Template file manifest - all files needed for the template
 TEMPLATE_FILES=(
     "template/README.md"
-    "template/cursor/rules/hand-offs.md"
-    "template/cursor/rules/personas.md"
-    "template/cursor/rules/workflow.md"
+    "template/cursor/rules/hand-offs.mdc"
+    "template/cursor/rules/personas.mdc"
+    "template/cursor/rules/workflow.mdc"
     "template/docs/changelog.md"
     "template/docs/dependencies.md"
     "template/windsurf/rules/hand-offs.md"
@@ -149,9 +149,7 @@ validate_template() {
     # Check for required files
     local required_files=(
         "template/workflow/docs/personas.md"
-        "template/workflow/docs/workflow.md"
-        "template/windsurf/rules/personas.md"
-        "template/cursor/rules/personas.md"
+        "template/cursor/rules/personas.mdc"
     )
     
     local missing=0
