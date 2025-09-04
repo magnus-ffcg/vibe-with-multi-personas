@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Multi-Persona Development Bootstrap Template - GitHub Installation Script
-# Downloads and runs the bootstrap script from a GitHub repository
+# Multi-Persona Development Bootstrap Template - Installer
+# Downloads template files directly from GitHub without requiring git
 # Usage: ./install.sh <github-repo-url> <target-directory> [project-name] [ide]
-# Or: ./install.sh GITHUB_URL /path/to/new-project [project-name]
 
 set -e
 
@@ -31,6 +30,26 @@ print_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
+# Template file manifest - all files needed for the template
+TEMPLATE_FILES=(
+    "bootstrap.sh"
+    "template/README.md"
+    "template/cursor/rules/hand-offs.md"
+    "template/cursor/rules/personas.md"
+    "template/cursor/rules/workflow.md"
+    "template/docs/changelog.md"
+    "template/docs/dependencies.md"
+    "template/windsurf/rules/hand-offs.md"
+    "template/windsurf/rules/personas.md"
+    "template/windsurf/rules/workflow.md"
+    "template/workflow/docs/backlog.md"
+    "template/workflow/docs/hand-offs.md"
+    "template/workflow/docs/personas.md"
+    "template/workflow/docs/plan.md"
+    "template/workflow/docs/release-notes.md"
+    "template/workflow/docs/workflow.md"
+)
+
 # Function to validate GitHub URL
 validate_github_url() {
     local url="$1"
@@ -54,56 +73,71 @@ validate_github_url() {
     fi
 }
 
-# Function to normalize GitHub URL for cloning
-normalize_github_url() {
+# Function to convert GitHub URL to raw content URL
+github_to_raw_url() {
     local url="$1"
+    local file_path="$2"
     
-    # Convert SSH to HTTPS for broader compatibility
+    # Convert SSH to HTTPS
     if [[ "$url" =~ ^git@github\.com:(.+)$ ]]; then
         url="https://github.com/${BASH_REMATCH[1]}"
     fi
     
-    # Ensure .git suffix for cloning
-    if [[ ! "$url" =~ \.git$ ]]; then
-        url="${url}.git"
-    fi
+    # Remove .git suffix if present
+    url="${url%.git}"
     
-    echo "$url"
+    # Convert to raw URL format
+    local raw_url="${url/github.com/raw.githubusercontent.com}/main/${file_path}"
+    echo "$raw_url"
 }
 
-# Function to extract repository name from URL
-extract_repo_name() {
-    local url="$1"
+# Function to download a single file
+download_file() {
+    local repo_url="$1"
+    local file_path="$2"
+    local target_dir="$3"
     
-    # Extract repo name from various URL formats
-    if [[ "$url" =~ github\.com[:/]([^/]+)/([^/]+)(\.git)?/?$ ]]; then
-        echo "${BASH_REMATCH[2]}"
-    else
-        echo "template"
-    fi
-}
-
-# Function to clone repository
-clone_repository() {
-    local github_url="$1"
-    local temp_dir="$2"
+    local raw_url=$(github_to_raw_url "$repo_url" "$file_path")
+    local target_file="$target_dir/$file_path"
+    local target_file_dir=$(dirname "$target_file")
     
-    print_info "Cloning repository from $github_url..."
+    # Create target directory
+    mkdir -p "$target_file_dir"
     
-    # Normalize URL for cloning
-    local clone_url=$(normalize_github_url "$github_url")
-    
-    # Clone with error handling
-    if ! git clone --depth 1 --quiet "$clone_url" "$temp_dir" 2>/dev/null; then
-        print_error "Failed to clone repository. Please check:"
-        print_error "  - Repository URL is correct"
-        print_error "  - Repository is public or you have access"
-        print_error "  - Internet connection is working"
-        print_error "  - Git is installed and configured"
+    # Download file
+    if ! curl -s -f -o "$target_file" "$raw_url"; then
+        print_warning "Failed to download: $file_path"
         return 1
     fi
     
-    print_success "Repository cloned successfully"
+    return 0
+}
+
+# Function to download all template files
+download_template() {
+    local repo_url="$1"
+    local temp_dir="$2"
+    
+    print_info "Downloading template files from repository..."
+    
+    local downloaded=0
+    local failed=0
+    
+    for file in "${TEMPLATE_FILES[@]}"; do
+        if download_file "$repo_url" "$file" "$temp_dir"; then
+            ((downloaded++))
+        else
+            ((failed++))
+        fi
+    done
+    
+    print_info "Downloaded: $downloaded files, Failed: $failed files"
+    
+    if [ $failed -gt 0 ]; then
+        print_warning "Some files failed to download, but continuing..."
+    fi
+    
+    print_success "Template download complete"
     return 0
 }
 
@@ -122,19 +156,26 @@ validate_template() {
         "template/cursor/rules/personas.md"
     )
     
+    local missing=0
     for file in "${required_files[@]}"; do
         if [ ! -f "$template_dir/$file" ]; then
             print_warning "Template may be incomplete - missing: $file"
+            ((missing++))
         fi
     done
     
     # Check if bootstrap.sh is executable
-    if [ -f "$template_dir/bootstrap.sh" ] && [ ! -x "$template_dir/bootstrap.sh" ]; then
-        print_info "Making bootstrap.sh executable..."
+    if [ -f "$template_dir/bootstrap.sh" ]; then
         chmod +x "$template_dir/bootstrap.sh"
+        print_info "Made bootstrap.sh executable"
     fi
     
-    print_success "Template validation complete"
+    if [ $missing -eq 0 ]; then
+        print_success "Template validation complete - all required files present"
+    else
+        print_warning "Template validation complete - $missing files missing"
+    fi
+    
     return 0
 }
 
@@ -143,6 +184,7 @@ run_bootstrap() {
     local template_dir="$1"
     local target_dir="$2"
     local project_name="$3"
+    local target_ide="$4"
     
     print_info "Running bootstrap script..."
     
@@ -154,8 +196,8 @@ run_bootstrap() {
     # Run bootstrap script from template directory
     cd "$template_dir"
     
-    if [ -n "$project_name" ] && [ -n "$TARGET_IDE" ]; then
-        ./bootstrap.sh "$target_dir" "$project_name" "$TARGET_IDE"
+    if [ -n "$project_name" ] && [ -n "$target_ide" ]; then
+        ./bootstrap.sh "$target_dir" "$project_name" "$target_ide"
     elif [ -n "$project_name" ]; then
         ./bootstrap.sh "$target_dir" "$project_name"
     else
@@ -181,17 +223,24 @@ show_usage() {
     echo "Multi-Persona Development Template Installer"
     echo ""
     echo "Usage:"
-    echo "  bash <(curl -s URL/install.sh) GITHUB_URL /path/to/new-project [project-name]"
-    echo "  ./install.sh GITHUB_URL /path/to/new-project [project-name]"
+    echo "  bash <(curl -s URL/install.sh) GITHUB_URL /path/to/new-project [project-name] [ide]"
+    echo "  ./install.sh GITHUB_URL /path/to/new-project [project-name] [ide]"
     echo ""
     echo "Arguments:"
     echo "  GITHUB_URL      GitHub repository URL (https://github.com/user/repo)"
     echo "  /path/to/new-project  Directory where new project will be created"
     echo "  project-name    Optional project name (defaults to directory name)"
+    echo "  ide             Optional IDE (windsurf, cursor - defaults to auto-detect)"
     echo ""
     echo "Examples:"
     echo "  bash <(curl -s URL/install.sh) https://github.com/user/template /tmp/my-project"
-    echo "  ./install.sh https://github.com/user/template.git /home/user/projects/new-app \"My App\""
+    echo "  ./install.sh https://github.com/user/template.git /home/user/projects/new-app \"My App\" windsurf"
+    echo ""
+    echo "Benefits:"
+    echo "  - No git dependency required"
+    echo "  - Faster downloads (only needed files)"
+    echo "  - Smaller footprint"
+    echo "  - Works with curl only"
 }
 
 # Main function
@@ -210,6 +259,7 @@ main() {
         print_error "Usage: $0 <github-repo-url> <target-directory> [project-name] [ide]"
         print_info "Example: $0 https://github.com/user/repo /path/to/new-project 'My Project' windsurf"
         print_info "Supported IDEs: windsurf, cursor"
+        show_usage
         exit 1
     fi
     
@@ -219,8 +269,8 @@ main() {
     fi
     
     # Check dependencies
-    if ! command -v git >/dev/null 2>&1; then
-        print_error "Git is required but not installed"
+    if ! command -v curl >/dev/null 2>&1; then
+        print_error "curl is required but not installed"
         exit 1
     fi
     
@@ -234,15 +284,19 @@ main() {
     # Set up cleanup trap
     trap "cleanup '$TEMP_DIR'" EXIT
     
-    print_info "GitHub URL: $REPO_URL"
+    print_info "Repository URL: $REPO_URL"
     print_info "Target directory: $TARGET_DIR"
     if [ -n "$PROJECT_NAME" ]; then
         print_info "Project name: $PROJECT_NAME"
     fi
+    if [ -n "$TARGET_IDE" ]; then
+        print_info "Target IDE: $TARGET_IDE"
+    fi
     print_info "Temporary directory: $TEMP_DIR"
     
-    # Clone repository
-    if ! clone_repository "$REPO_URL" "$TEMP_DIR"; then
+    # Download template files
+    if ! download_template "$REPO_URL" "$TEMP_DIR"; then
+        print_error "Template download failed"
         exit 1
     fi
     
@@ -252,7 +306,7 @@ main() {
     fi
     
     # Run bootstrap
-    if ! run_bootstrap "$TEMP_DIR" "$TARGET_DIR" "$PROJECT_NAME"; then
+    if ! run_bootstrap "$TEMP_DIR" "$TARGET_DIR" "$PROJECT_NAME" "$TARGET_IDE"; then
         print_error "Bootstrap failed"
         exit 1
     fi
