@@ -64,7 +64,7 @@ download_file() {
     mkdir -p "$target_file_dir"
     
     # Download file
-    if ! curl -s -f -o "$target_file" "$raw_url"; then
+    if ! curl -s -f -o "$target_file" "$raw_url" -H "Cache-Control: no-cache, no-store"; then
         print_warning "Failed to download: $file_path"
         return 1
     fi
@@ -227,7 +227,6 @@ show_usage() {
     echo "  ./install.sh GITHUB_URL /path/to/new-project [project-name] [ide]"
     echo ""
     echo "Arguments:"
-    echo "  GITHUB_URL      GitHub repository URL (https://github.com/user/repo)"
     echo "  /path/to/new-project  Directory where new project will be created"
     echo "  project-name    Optional project name (defaults to directory name)"
     echo "  ide             Optional IDE (windsurf, cursor - defaults to auto-detect)"
