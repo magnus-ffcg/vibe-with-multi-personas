@@ -138,64 +138,75 @@ validate_template() {
 # Function to run bootstrap
 run_bootstrap() {
     local template_dir="$1"
-    local target_dir="$2"
     local project_name="$3"
     local target_ide="$4"
     
-    print_info "Setting up project structure..."
+    # Ensure target_dir is absolute
+    target_dir="$(pwd)"
+    
+    print_info "Setting up project structure in $target_dir..."
     
     # Create target directory if it doesn't exist
-    mkdir -p "$target_dir"
+    mkdir -p "$target_dir" || {
+        print_error "Failed to create target directory: $target_dir"
+        return 1
+    }
     
-    # Create necessary directories
-    mkdir -p "$target_dir/docs"
-    mkdir -p "$target_dir/workflow/docs"
+    # Change to target directory
+    cd "$target_dir" || {
+        print_error "Failed to change to target directory: $target_dir"
+        return 1
+    }
     
     # Copy template files individually to avoid copying the template directory itself
     if [ -f "$template_dir/template/README.md" ]; then
-        cp "$template_dir/template/README.md" "$target_dir/"
+        cp "$template_dir/template/README.md" "./" || print_warning "Failed to copy README.md"
     fi
     
-    # Copy docs files
+    # Create and copy docs files
     if [ -d "$template_dir/template/docs" ]; then
-        cp -r "$template_dir/template/docs/"* "$target_dir/docs/" 2>/dev/null || true
+        mkdir -p "./docs"
+        cp -r "$template_dir/template/docs/"* "./docs/" 2>/dev/null || true
     fi
     
-    # Copy workflow files to hidden .workflow directory
+    # Create and copy workflow files to hidden .workflow directory
     if [ -d "$template_dir/template/workflow" ]; then
-        mkdir -p "$target_dir/.workflow"
-        cp -r "$template_dir/template/workflow/"* "$target_dir/.workflow/" 2>/dev/null || true
+        mkdir -p "./.workflow"
+        cp -r "$template_dir/template/workflow/"* "./.workflow/" 2>/dev/null || true
         # Remove non-hidden workflow directory if it exists
-        rm -rf "$target_dir/workflow"
+        rm -rf "./workflow" 2>/dev/null || true
     fi
     
     # Handle IDE-specific files
     if [ "$target_ide" = "windsurf" ]; then
         # Copy windsurf-specific files to hidden directory
         if [ -d "$template_dir/template/windsurf" ]; then
-            mkdir -p "$target_dir/.windsurf"
-            cp -r "$template_dir/template/windsurf/"* "$target_dir/.windsurf/" 2>/dev/null || true
+            mkdir -p "./.windsurf"
+            cp -r "$template_dir/template/windsurf/"* "./.windsurf/" 2>/dev/null || true
         fi
         # Remove any non-hidden windsurf directory if it exists
-        rm -rf "$target_dir/windsurf"
+        rm -rf "./windsurf" 2>/dev/null || true
         # Remove cursor directories if they exist
-        rm -rf "$target_dir/cursor"
-        rm -rf "$target_dir/.cursor"
+        rm -rf "./cursor" 2>/dev/null || true
+        rm -rf "./.cursor" 2>/dev/null || true
     elif [ "$target_ide" = "cursor" ]; then
         # Copy cursor-specific files to hidden directory
         if [ -d "$template_dir/template/cursor" ]; then
-            mkdir -p "$target_dir/.cursor"
-            cp -r "$template_dir/template/cursor/"* "$target_dir/.cursor/" 2>/dev/null || true
+            mkdir -p "./.cursor"
+            cp -r "$template_dir/template/cursor/"* "./.cursor/" 2>/dev/null || true
         fi
         # Remove any non-hidden cursor directory if it exists
-        rm -rf "$target_dir/cursor"
+        rm -rf "./cursor" 2>/dev/null || true
         # Remove windsurf directories if they exist
-        rm -rf "$target_dir/windsurf"
-        rm -rf "$target_dir/.windsurf"
+        rm -rf "./windsurf" 2>/dev/null || true
+        rm -rf "./.windsurf" 2>/dev/null || true
     fi
     
+    # Change back to original directory
+    cd - >/dev/null || true
+    
     # Update project name in README if provided
-    if [ -n "$project_name" ]; then
+    if [ -n "$project_name" ] && [ -f "$target_dir/README.md" ]; then
         # Use different sed syntax for macOS and Linux
         if [[ "$(uname)" == "Darwin" ]]; then
             sed -i '' "s/\[PROJECT_NAME\]/$project_name/g" "$target_dir/README.md"
@@ -213,7 +224,7 @@ cleanup() {
     
     if [ -d "$temp_dir" ]; then
         print_info "Cleaning up temporary files..."
-        rm -rf "$temp_dir"
+        #rm -rf "$temp_dir"
         print_success "Cleanup complete"
     fi
 }
@@ -248,8 +259,22 @@ main() {
     print_info "============================================="
     
     # Parse arguments
-    TARGET_DIR="."
-    TARGET_IDE="$2"
+    if [ "$1" = "windsurf" ] || [ "$1" = "cursor" ]; then
+        # One-liner format: install.sh windsurf or install.sh cursor
+        TARGET_DIR="$(pwd)"
+        TARGET_IDE="$1"
+    else
+        # Legacy format: install.sh [ide] [project_name]
+        TARGET_DIR="$(pwd)"
+        TARGET_IDE="$1"
+        PROJECT_NAME="$2"
+    fi
+    
+    # Show usage if no IDE specified
+    if [ -z "$TARGET_IDE" ] || ! [[ "$TARGET_IDE" =~ ^(windsurf|cursor)$ ]]; then
+        show_usage
+        exit 1
+    fi
     
     # Check dependencies
     if ! command -v curl >/dev/null 2>&1; then
