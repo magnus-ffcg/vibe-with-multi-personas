@@ -260,14 +260,8 @@ main() {
     
     # Always use current directory as target
     TARGET_DIR="$(pwd)"
-    
-    # If first arg is a directory, shift it out
-    if [ -n "$1" ] && [ -d "$1" ]; then
-        shift
-    fi
-    
-    # First argument is now always the IDE (or empty)
-    TARGET_IDE="${1:-cursor}"  # Default to cursor if not specified
+    # Always use $2 as IDE (for curl one-liner)
+    TARGET_IDE="${2:-cursor}"  # Default to cursor if not specified
     
     # Show usage if no IDE specified
     if [ -z "$TARGET_IDE" ] || ! [[ "$TARGET_IDE" =~ ^(windsurf|cursor)$ ]]; then
