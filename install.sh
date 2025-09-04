@@ -32,7 +32,6 @@ print_error() {
 
 # Template file manifest - all files needed for the template
 TEMPLATE_FILES=(
-    "bootstrap.sh"
     "template/README.md"
     "template/cursor/rules/hand-offs.md"
     "template/cursor/rules/personas.md"
@@ -149,7 +148,6 @@ validate_template() {
     
     # Check for required files
     local required_files=(
-        "bootstrap.sh"
         "template/workflow/docs/personas.md"
         "template/workflow/docs/workflow.md"
         "template/windsurf/rules/personas.md"
@@ -186,22 +184,26 @@ run_bootstrap() {
     local project_name="$3"
     local target_ide="$4"
     
-    print_info "Running bootstrap script..."
+    print_info "Setting up project structure..."
     
-    if [ ! -f "$template_dir/bootstrap.sh" ]; then
-        print_error "Bootstrap script not found in template"
-        return 1
+    # Create target directory if it doesn't exist
+    mkdir -p "$target_dir"
+    
+    # Copy template files to target directory
+    cp -r "$template_dir/template/"* "$target_dir/"
+    
+    # Handle IDE-specific files
+    if [ "$target_ide" = "windsurf" ]; then
+        # Copy windsurf-specific files
+        cp -r "$template_dir/template/windsurf" "$target_dir/.windsurf"
+    elif [ "$target_ide" = "cursor" ]; then
+        # Copy cursor-specific files
+        cp -r "$template_dir/template/cursor" "$target_dir/.cursor"
     fi
     
-    # Run bootstrap script from template directory
-    cd "$template_dir"
-    
-    if [ -n "$project_name" ] && [ -n "$target_ide" ]; then
-        ./bootstrap.sh "$target_dir" "$project_name" "$target_ide"
-    elif [ -n "$project_name" ]; then
-        ./bootstrap.sh "$target_dir" "$project_name"
-    else
-        ./bootstrap.sh "$target_dir"
+    # Update project name in README if provided
+    if [ -n "$project_name" ]; then
+        sed -i '' "s/{{PROJECT_NAME}}/$project_name/g" "$target_dir/README.md"
     fi
     
     return $?
