@@ -55,7 +55,7 @@ download_file() {
     local file_path="$1"
     local target_dir="$2"
     
-    local raw_url=$("$repo_url$file_path")
+    local raw_url="${repo_url}${file_path}"
     local target_file="$target_dir/$file_path"
     local target_file_dir=$(dirname "$target_file")
     
