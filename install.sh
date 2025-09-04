@@ -49,47 +49,6 @@ TEMPLATE_FILES=(
     "template/workflow/docs/workflow.md"
 )
 
-# Function to validate GitHub URL
-validate_github_url() {
-    local url="$1"
-    
-    if [ -z "$url" ]; then
-        print_error "GitHub URL cannot be empty"
-        return 1
-    fi
-    
-    # Support various GitHub URL formats
-    if [[ "$url" =~ ^https://github\.com/[^/]+/[^/]+/?$ ]] || \
-       [[ "$url" =~ ^git@github\.com:[^/]+/[^/]+\.git$ ]] || \
-       [[ "$url" =~ ^https://github\.com/[^/]+/[^/]+\.git$ ]]; then
-        return 0
-    else
-        print_error "Invalid GitHub URL format. Supported formats:"
-        print_error "  https://github.com/user/repo"
-        print_error "  https://github.com/user/repo.git"
-        print_error "  git@github.com:user/repo.git"
-        return 1
-    fi
-}
-
-# Function to convert GitHub URL to raw content URL
-github_to_raw_url() {
-    local url="$1"
-    local file_path="$2"
-    
-    # Convert SSH to HTTPS
-    if [[ "$url" =~ ^git@github\.com:(.+)$ ]]; then
-        url="https://github.com/${BASH_REMATCH[1]}"
-    fi
-    
-    # Remove .git suffix if present
-    url="${url%.git}"
-    
-    # Convert to raw URL format
-    local raw_url="${url/github.com/raw.githubusercontent.com}/main/${file_path}"
-    echo "$raw_url"
-}
-
 # Function to download a single file
 download_file() {
     local repo_url="$1"
@@ -289,24 +248,9 @@ main() {
     print_info "============================================="
     
     # Parse arguments
-    REPO_URL="$1"
-    TARGET_DIR="$2"
-    PROJECT_NAME="$3"
-    TARGET_IDE="$4"
-    
-    # Validate arguments
-    if [ -z "$REPO_URL" ] || [ -z "$TARGET_DIR" ]; then
-        print_error "Usage: $0 <github-repo-url> <target-directory> [project-name] [ide]"
-        print_info "Example: $0 https://github.com/user/repo /path/to/new-project 'My Project' windsurf"
-        print_info "Supported IDEs: windsurf, cursor"
-        show_usage
-        exit 1
-    fi
-    
-    # Validate GitHub URL
-    if ! validate_github_url "$REPO_URL"; then
-        exit 1
-    fi
+    TARGET_DIR="$1"
+    PROJECT_NAME="$2"
+    TARGET_IDE="$3"
     
     # Check dependencies
     if ! command -v curl >/dev/null 2>&1; then
@@ -324,7 +268,6 @@ main() {
     # Set up cleanup trap
     trap "cleanup '$TEMP_DIR'" EXIT
     
-    print_info "Repository URL: $REPO_URL"
     print_info "Target directory: $TARGET_DIR"
     if [ -n "$PROJECT_NAME" ]; then
         print_info "Project name: $PROJECT_NAME"
