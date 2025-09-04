@@ -7,34 +7,10 @@ This template provides a complete multi-persona development workflow system with
 ### One-Line Installation (Recommended)
 ```bash
 # For Windsurf Cascade
-bash <(curl -s https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/main/install.sh) \
-  https://github.com/magnus-ffcg/vibe-with-multi-personas.git \
-  /path/to/your/new-project \
-  "Your Project Name" \
-  windsurf
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" windsurf
 
-# For Cursor IDE
-bash <(curl -s https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/main/install.sh) \
-  https://github.com/magnus-ffcg/vibe-with-multi-personas.git \
-  /path/to/your/new-project \
-  "Your Project Name" \
-  cursor
-
-# Auto-detect IDE (will prompt if unable to detect)
-bash <(curl -s https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/main/install.sh) \
-  https://github.com/magnus-ffcg/vibe-with-multi-personas.git \
-  /path/to/your/new-project \
-  "Your Project Name"
-```
-
-### Alternative: Download and Run Locally
-```bash
-# Download the installer
-curl -O https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/main/install.sh
-chmod +x install.sh
-
-# Run installation
-./install.sh https://github.com/magnus-ffcg/vibe-with-multi-personas.git /path/to/your/new-project "Your Project Name" windsurf
+# For Cusror 
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" cursor
 ```
 
 ### Installation Benefits
