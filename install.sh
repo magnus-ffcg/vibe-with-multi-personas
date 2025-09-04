@@ -55,7 +55,7 @@ download_file() {
     local file_path="$1"
     local target_dir="$2"
     
-    # Remove 'template/' prefix from file path for the URL
+    # Remove 'template/' prefix from file path fogr the URL
     local relative_path="${file_path}"
     local raw_url="${repo_url}/${relative_path}"
     local target_file="$target_dir/$file_path"
@@ -83,7 +83,6 @@ download_template() {
     local failed=0
     
     for file in "${TEMPLATE_FILES[@]}"; do
-        echo $file
         if download_file "$file" "$temp_dir"; then
             ((downloaded++))
         else
@@ -249,9 +248,8 @@ main() {
     print_info "============================================="
     
     # Parse arguments
-    TARGET_DIR="$1"
-    PROJECT_NAME="$2"
-    TARGET_IDE="$3"
+    TARGET_DIR="."
+    TARGET_IDE="$2"
     
     # Check dependencies
     if ! command -v curl >/dev/null 2>&1; then
