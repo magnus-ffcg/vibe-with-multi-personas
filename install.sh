@@ -65,7 +65,7 @@ download_file() {
     mkdir -p "$target_file_dir"
     
     # Download file
-    if ! curl -s -f -L -o "$target_file" "$raw_url" -H "Cache-Control: no-cache, no-store"; then
+    if ! curl -s -f -L -o "$target_file" "$raw_url"; then
         print_warning "Failed to download: $file_path"
         return 1
     fi
