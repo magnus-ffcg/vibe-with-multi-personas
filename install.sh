@@ -189,21 +189,61 @@ run_bootstrap() {
     # Create target directory if it doesn't exist
     mkdir -p "$target_dir"
     
-    # Copy template files to target directory
-    cp -r "$template_dir/template/"* "$target_dir/"
+    # Create necessary directories
+    mkdir -p "$target_dir/docs"
+    mkdir -p "$target_dir/workflow/docs"
+    
+    # Copy template files individually to avoid copying the template directory itself
+    if [ -f "$template_dir/template/README.md" ]; then
+        cp "$template_dir/template/README.md" "$target_dir/"
+    fi
+    
+    # Copy docs files
+    if [ -d "$template_dir/template/docs" ]; then
+        cp -r "$template_dir/template/docs/"* "$target_dir/docs/" 2>/dev/null || true
+    fi
+    
+    # Copy workflow files to hidden .workflow directory
+    if [ -d "$template_dir/template/workflow" ]; then
+        mkdir -p "$target_dir/.workflow"
+        cp -r "$template_dir/template/workflow/"* "$target_dir/.workflow/" 2>/dev/null || true
+        # Remove non-hidden workflow directory if it exists
+        rm -rf "$target_dir/workflow"
+    fi
     
     # Handle IDE-specific files
     if [ "$target_ide" = "windsurf" ]; then
-        # Copy windsurf-specific files
-        cp -r "$template_dir/template/windsurf" "$target_dir/.windsurf"
+        # Copy windsurf-specific files to hidden directory
+        if [ -d "$template_dir/template/windsurf" ]; then
+            mkdir -p "$target_dir/.windsurf"
+            cp -r "$template_dir/template/windsurf/"* "$target_dir/.windsurf/" 2>/dev/null || true
+        fi
+        # Remove any non-hidden windsurf directory if it exists
+        rm -rf "$target_dir/windsurf"
+        # Remove cursor directories if they exist
+        rm -rf "$target_dir/cursor"
+        rm -rf "$target_dir/.cursor"
     elif [ "$target_ide" = "cursor" ]; then
-        # Copy cursor-specific files
-        cp -r "$template_dir/template/cursor" "$target_dir/.cursor"
+        # Copy cursor-specific files to hidden directory
+        if [ -d "$template_dir/template/cursor" ]; then
+            mkdir -p "$target_dir/.cursor"
+            cp -r "$template_dir/template/cursor/"* "$target_dir/.cursor/" 2>/dev/null || true
+        fi
+        # Remove any non-hidden cursor directory if it exists
+        rm -rf "$target_dir/cursor"
+        # Remove windsurf directories if they exist
+        rm -rf "$target_dir/windsurf"
+        rm -rf "$target_dir/.windsurf"
     fi
     
     # Update project name in README if provided
     if [ -n "$project_name" ]; then
-        sed -i '' "s/{{PROJECT_NAME}}/$project_name/g" "$target_dir/README.md"
+        # Use different sed syntax for macOS and Linux
+        if [[ "$(uname)" == "Darwin" ]]; then
+            sed -i '' "s/\[PROJECT_NAME\]/$project_name/g" "$target_dir/README.md"
+        else
+            sed -i "s/\[PROJECT_NAME\]/$project_name/g" "$target_dir/README.md"
+        fi
     fi
     
     return $?
