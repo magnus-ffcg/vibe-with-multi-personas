@@ -51,7 +51,7 @@ TEMPLATE_FILES=(
 
 # Function to download a single file
 download_file() {
-    local repo_url="https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main"
+    local repo_url="https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/"
     local file_path="$1"
     local target_dir="$2"
     
