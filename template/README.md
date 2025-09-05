@@ -15,7 +15,7 @@ This project uses the Multi-Persona Development Workflow system with structured 
 - **Best for**: Complex projects requiring thorough validation and review
 
 ### Strict TDD
-- **Personas**: ARCHITECT → TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER
+- **Personas**: ARCHITECT → TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER (3 personas)
 - **Focus**: Architecture planning with strict Test-Driven Development cycle
 - **Best for**: Projects requiring high test coverage and disciplined TDD approach
 

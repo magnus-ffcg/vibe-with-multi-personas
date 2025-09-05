@@ -7,12 +7,15 @@ Bootstrap your projects with structured AI collaboration workflows. Choose betwe
 ### One-Line Installation (Recommended)
 ```bash
 # Team Development Workflow (6 personas - comprehensive review)
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" windsurf team-development
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" cursor team-development
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" --windsurf --team-development
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" --cursor --team-development
 
-# Strict TDD Workflow (single persona with TDD stages)
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" windsurf strict-tdd
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" cursor strict-tdd
+# Strict TDD Workflow (3 personas with TDD stages)
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" --windsurf --strict-tdd
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" --cursor --strict-tdd
+
+# Use defaults (cursor + team-development)
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" --strict-tdd
 ```
 
 ### Installation Benefits
@@ -35,12 +38,12 @@ bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-m
 - **Quality Gates**: Architecture design, code review, testing, QA validation
 - **Documentation**: Full ADR process, detailed planning, comprehensive tracking
 
-### Strict TDD (Single Persona with Stages)  
-**TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER**
-- **Focus**: Test-Driven Development with strict Red-Green-Refactor cycle
-- **Best for**: Projects requiring high test coverage and quality assurance
-- **Enforcement**: Single persona transitions through TDD stages with clear boundaries
-- **Stages**: RED (failing tests) → GREEN (minimal code) → REFACTOR (improve code)
+### Strict TDD (3 Personas)  
+**ARCHITECT → TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER**
+- **Focus**: Architecture planning with strict Test-Driven Development cycle
+- **Best for**: Projects requiring high test coverage and disciplined TDD approach
+- **Enforcement**: ARCHITECT plans, TDD_DEVELOPER executes TDD stages with clear boundaries
+- **Stages**: ARCHITECT (design) → RED (failing tests) → GREEN (minimal code) → REFACTOR (improve code)
 
 ## What You Get
 

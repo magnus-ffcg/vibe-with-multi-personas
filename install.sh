@@ -283,23 +283,26 @@ show_usage() {
     echo "Development Bootstrap Installer"
     echo ""
     echo "Usage:"
-    echo "  bash <(curl -s URL/install.sh) [ide] [workflow]"
-    echo "  ./install.sh [ide] [workflow]"
+    echo "  bash <(curl -s URL/install.sh) [flags]"
+    echo "  ./install.sh [flags]"
     echo ""
-    echo "Arguments:"
-    echo "  ide        IDE to configure (windsurf, cursor - defaults to cursor)"
-    echo "  workflow   Workflow to install (team-development, strict-tdd - defaults to team-development)"
+    echo "Flags:"
+    echo "  --cursor           Use Cursor IDE (default)"
+    echo "  --windsurf         Use Windsurf IDE"
+    echo "  --team-development Use team development workflow (default)"
+    echo "  --strict-tdd       Use strict TDD workflow"
     echo ""
     echo "Available Workflows:"
     echo "  team-development  - 6 personas with comprehensive review process"
     echo "                      ARCHITECT → CODER → TESTER → REVIEWER → QA → STAKEHOLDER"
-    echo "  strict-tdd        - 2 personas with strict Test-Driven Development"
+    echo "  strict-tdd        - 3 personas with strict Test-Driven Development"
     echo "                      ARCHITECT → TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER"
     echo ""
     echo "Examples:"
-    echo "  bash <(curl -s URL/install.sh) windsurf team-development"
-    echo "  bash <(curl -s URL/install.sh) cursor strict-tdd"
-    echo "  ./install.sh windsurf strict-tdd"
+    echo "  bash <(curl -s URL/install.sh) --windsurf --team-development"
+    echo "  bash <(curl -s URL/install.sh) --cursor --strict-tdd"
+    echo "  bash <(curl -s URL/install.sh) --strict-tdd"
+    echo "  ./install.sh --windsurf --strict-tdd"
     echo ""
     echo "Benefits:"
     echo "  - No git dependency required"
@@ -315,13 +318,34 @@ main() {
     
     # Always use current directory as target
     TARGET_DIR="$(pwd)"
-    # Always use $2 as IDE (for curl one-liner)
-    TARGET_IDE="${2:-cursor}"  # Default to cursor if not specified
-    # Always use $3 as WORKFLOW (for curl one-liner)
-    TARGET_WORKFLOW="${3:-team-development}"  # Default to team-development if not specified
+    # Parse flags
+    TARGET_IDE="cursor"  # Default IDE
+    TARGET_WORKFLOW="team-development"  # Default workflow
     
-    # Show usage if no IDE specified
-    if [ -z "$TARGET_IDE" ] || ! [[ "$TARGET_IDE" =~ ^(windsurf|cursor)$ ]]; then
+    for arg in "$@"; do
+        case $arg in
+            --cursor)
+                TARGET_IDE="cursor"
+                ;;
+            --windsurf)
+                TARGET_IDE="windsurf"
+                ;;
+            --team-development)
+                TARGET_WORKFLOW="team-development"
+                ;;
+            --strict-tdd)
+                TARGET_WORKFLOW="strict-tdd"
+                ;;
+            *)
+                print_error "Unknown flag: $arg"
+                show_usage
+                exit 1
+                ;;
+        esac
+    done
+    
+    # Show usage if no arguments provided
+    if [ $# -eq 0 ]; then
         show_usage
         exit 1
     fi
