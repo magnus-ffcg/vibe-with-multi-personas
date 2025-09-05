@@ -7,24 +7,29 @@ Bootstrap your projects with structured AI collaboration workflows. Choose betwe
 ### One-Line Installation (Recommended)
 ```bash
 # Team Development Workflow (6 personas - comprehensive review)
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
- --windsurf \
- --team-development
-
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
- --cursor \
- --team-development
+bash -c "$(curl -fsSL \
+    'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
+    -- --windsurf --team-development
+bash -c "$(curl -fsSL \
+    'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
+    -- --cursor --team-development
 
 # Strict TDD Workflow (3 personas with TDD stages)
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
- --windsurf \
- --strict-tdd
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
- --cursor \
- --strict-tdd
+bash -c "$(curl -fsSL \
+    'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
+    -- --windsurf --strict-tdd
 
-# Use defaults (cursor + team-development)
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" 
+bash -c "$(curl -fsSL \
+    'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
+    -- --cursor --strict-tdd
+
+# Use defaults (cursor + team-development) - no flags needed
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')"
+
+# Or specify just the workflow (uses cursor by default)
+bash -c "$(curl -fsSL \
+    'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
+    -- --strict-tdd 
 ```
 
 ### Installation Benefits
