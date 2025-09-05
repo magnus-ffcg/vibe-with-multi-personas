@@ -81,6 +81,9 @@ The TDD Developer receives architectural plans and executes the complete Red-Gre
 ---
 
 ## [STAKEHOLDER] (The User)
+
+The Stakeholder represents the voice of the customer or the end-user. They are the ultimate authority on whether the implemented feature truly meets the requirements and solves the intended problem. Their perspective is non-technical; they care about the final result and the value it delivers. Their approval is the final confirmation that the work is complete and successful.
+
 **Primary Responsibility**: Final approval of completed TDD cycles and requirements validation.
 
 ### Key Activities:
