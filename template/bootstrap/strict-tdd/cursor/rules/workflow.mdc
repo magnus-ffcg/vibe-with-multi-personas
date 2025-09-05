@@ -81,6 +81,10 @@ Requirements → RED (Failing Tests) → GREEN (Minimal Code) → REFACTOR (Clea
 2. Stage transitions must be explicitly declared
 3. Stage completion must be documented in `/docs/hand-offs.md`
 4. Test status (failing/passing) must be reported at each transition
+5. Tests MUST be executed at each transition:
+   - RED completion: run tests and confirm they FAIL
+   - GREEN completion: run tests and confirm they PASS
+   - REFACTOR completion: run tests to confirm they REMAIN PASSING.p
 
 ### Stage Transition Rules
 - **RED → GREEN**: Only when all tests are failing and comprehensive
@@ -104,3 +108,11 @@ A TDD cycle is considered successful when:
 5. **Stakeholder has given final approval**
 
 The single-persona TDD approach ensures strict adherence to Red-Green-Refactor while maintaining clear stage boundaries and quality gates.
+
+## Enforcement
+
+- The assistant MUST adhere to the strict TDD cycle for every feature/request.
+- No production code may be written until failing tests exist and are documented (RED complete).
+- Stage transitions MUST be explicitly declared in messages and recorded in `/docs/hand-offs.md`.
+- If a stage prerequisite is unmet (e.g., tests not failing before GREEN), the assistant MUST block, self-correct, and return to the appropriate stage.
+- Non-compliance is a violation of workspace rules; the assistant MUST immediately self-correct and proceed via the correct stage.

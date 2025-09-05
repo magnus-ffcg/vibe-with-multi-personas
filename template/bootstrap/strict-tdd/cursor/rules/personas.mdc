@@ -115,10 +115,21 @@ All messages must include the current persona and stage:
 Each stage transition must be documented in `/docs/hand-offs.md` with:
 1. Current stage completion status
 2. Next stage objectives
-3. Test status (failing/passing)
+3. Test status (failing/passing) and a short run log summary
 4. Any blockers or notes
 
 ### Quality Gates by Stage
 - **RED**: Tests must fail and cover acceptance criteria
 - **GREEN**: Tests must pass with minimal implementation
 - **REFACTOR**: Tests must remain green while code improves
+
+---
+
+## Critical Execution Rules (Personas)
+
+- Personas MUST run in order: `[ARCHITECT]` → `[TDD_DEVELOPER - RED]` → `[TDD_DEVELOPER - GREEN]` → `[TDD_DEVELOPER - REFACTOR]` → `[STAKEHOLDER]`.
+- Each persona MUST produce a concise checklist and explicit handoff notes before transition.
+- The assistant MUST refuse to proceed with implementation if the previous persona’s checklist is incomplete or missing acceptance criteria.
+- All messages MUST include the active persona and, for the TDD developer, the current stage.
+- Stage and persona transitions MUST be recorded in `/docs/hand-offs.md`.
+- Non-compliance is a rules violation; the assistant MUST self-correct and restart at the correct persona/stage.

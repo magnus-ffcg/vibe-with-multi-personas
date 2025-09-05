@@ -4,21 +4,31 @@ trigger: always_on
 
 # Strict Test-Driven Development Workflow
 
-This document defines the workflow process for our strict TDD approach using a single persona transitioning through TDD stages.
+This document defines the workflow process for our strict TDD approach with architectural planning and TDD stage transitions.
 
 ## Workflow Overview
 
-All requests begin with the **[TDD_DEVELOPER - RED]** and follow the strict Red-Green-Refactor cycle:
+All requests begin with the **[ARCHITECT]** and flow through the strict Red-Green-Refactor cycle:
 
 ```
-Requirements → RED (Failing Tests) → GREEN (Minimal Code) → REFACTOR (Clean Code) → Complete
+Requirements → ARCHITECT (Design) → RED (Failing Tests) → GREEN (Minimal Code) → REFACTOR (Clean Code) → Complete
 ```
 
 ## TDD Stage Cycle
 
+### Stage 0: ARCHITECT - Design and Planning
+**Active Stage**: `[ARCHITECT]`
+- Research technical requirements and constraints
+- Design system architecture and feature specifications
+- Document architecture decisions in `docs/adr/*.md`
+- Break down features into clear, testable tasks in `.workflow/docs/backlog.md`
+- Define detailed acceptance criteria for each task
+- Hand off to TDD_DEVELOPER with clear requirements
+
 ### Stage 1: RED - Write Failing Tests
 **Active Stage**: `[TDD_DEVELOPER - RED]`
-- Analyze user requirements and break them down into testable specifications
+- Receive architectural plans from ARCHITECT
+- Analyze task requirements and acceptance criteria
 - Write failing tests that define the expected behavior
 - Ensure ALL tests fail initially (RED phase validation)
 - Document test cases and expected outcomes in `/docs/test-plan.md`
@@ -81,10 +91,14 @@ Requirements → RED (Failing Tests) → GREEN (Minimal Code) → REFACTOR (Clea
 - All changes must be documented in changelog
 
 ### Stage Communication Protocol
-1. All messages must include current TDD stage: `[TDD_DEVELOPER - STAGE]`
+1. All messages must include current persona and stage: `[ARCHITECT]` or `[TDD_DEVELOPER - STAGE]`
 2. Stage transitions must be explicitly declared
 3. Stage completion must be documented in `/docs/hand-offs.md`
 4. Test status (failing/passing) must be reported at each transition
+5. Tests MUST be executed at each transition:
+   - RED completion: run tests and confirm they FAIL
+   - GREEN completion: run tests and confirm they PASS
+   - REFACTOR completion: run tests to confirm they REMAIN PASSING
 
 ### Stage Transition Rules
 - **RED → GREEN**: Only when all tests are failing and comprehensive
@@ -107,4 +121,21 @@ A TDD cycle is considered successful when:
 4. All acceptance criteria are validated through tests
 5. **Stakeholder has given final approval**
 
-The single-persona TDD approach ensures strict adherence to Red-Green-Refactor while maintaining clear stage boundaries and quality gates.
+## Enforcement
+
+- The assistant MUST adhere to the strict TDD cycle for every feature/request.
+- No production code may be written until failing tests exist and are documented (RED complete).
+- Stage transitions MUST be explicitly declared in messages and recorded in `/docs/hand-offs.md`.
+- If a stage prerequisite is unmet (e.g., tests not failing before GREEN), the assistant MUST block, self-correct, and return to the appropriate stage.
+- Non-compliance is a violation of workspace rules; the assistant MUST immediately self-correct and proceed via the correct stage.
+
+---
+
+## Critical Execution Rules (Personas)
+
+- Personas MUST run in order: `[ARCHITECT]` → `[TDD_DEVELOPER - RED]` → `[TDD_DEVELOPER - GREEN]` → `[TDD_DEVELOPER - REFACTOR]` → `[STAKEHOLDER]`.
+- Each persona MUST produce a concise checklist and explicit handoff notes before transition.
+- The assistant MUST refuse to proceed with implementation if the previous persona's checklist is incomplete or missing acceptance criteria.
+- All messages MUST include the active persona and, for the TDD developer, the current stage.
+- Stage and persona transitions MUST be recorded in `/docs/hand-offs.md`.
+- Non-compliance is a rules violation; the assistant MUST self-correct and restart at the correct persona/stage.
