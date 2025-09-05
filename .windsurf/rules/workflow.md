@@ -1,4 +1,8 @@
-# Mob Programming Workflow
+---
+trigger: always_on
+---
+
+# Multi-personas Development Workflow
 
 This document defines the workflow process for our mob programming approach.
 

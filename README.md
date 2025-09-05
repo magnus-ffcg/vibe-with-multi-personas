@@ -1,16 +1,18 @@
-# Multi-Persona Development Bootstrap Template
+# Development Bootstrap Templates for cursor / windsurf
 
-This template provides a complete multi-persona development workflow system with 6 defined personas, comprehensive documentation structure, and automated bootstrap tools. Supports both **Windsurf Cascade** and **Cursor IDE**. It demonstrates best practices by following its own workflow during development.
+Bootstrap your projects with structured AI collaboration workflows. Choose between **Team Development** (6-persona comprehensive review) or **Strict TDD** (single persona with Red-Green-Refactor stages). Works with both **Windsurf Cascade** and **Cursor IDE** - just run one command to get started.
 
 ## 🚀 Quick Start
 
 ### One-Line Installation (Recommended)
 ```bash
-# For Windsurf Cascade
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" windsurf
+# Team Development Workflow (6 personas - comprehensive review)
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" windsurf team-development
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" cursor team-development
 
-# For Cusror 
-bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" cursor
+# Strict TDD Workflow (single persona with TDD stages)
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" windsurf strict-tdd
+bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" cursor strict-tdd
 ```
 
 ### Installation Benefits
@@ -24,12 +26,28 @@ bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-m
 2. **Follow the generated instructions** in your new project
 3. Start coding with multi-persona development workflow!
 
+## Available Workflows
+
+### Team Development (6 Personas)
+**ARCHITECT → CODER → TESTER → REVIEWER → QA → STAKEHOLDER**
+- **Focus**: Comprehensive review process with multiple quality gates
+- **Best for**: Complex projects requiring thorough validation and review
+- **Quality Gates**: Architecture design, code review, testing, QA validation
+- **Documentation**: Full ADR process, detailed planning, comprehensive tracking
+
+### Strict TDD (Single Persona with Stages)  
+**TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER**
+- **Focus**: Test-Driven Development with strict Red-Green-Refactor cycle
+- **Best for**: Projects requiring high test coverage and quality assurance
+- **Enforcement**: Single persona transitions through TDD stages with clear boundaries
+- **Stages**: RED (failing tests) → GREEN (minimal code) → REFACTOR (improve code)
+
 ## What You Get
 
 This template provides a complete multi-persona development system with:
 
-✅ **6 Defined Personas** - Clear roles from architecture to stakeholder approval  
-✅ **Structured Workflow** - Proven pipeline from idea to completion  
+✅ **Multiple Workflows** - Choose between comprehensive review or strict TDD  
+✅ **Structured Process** - Proven pipelines from idea to completion  
 ✅ **Quality Gates** - Multiple checkpoints ensure high-quality output  
 ✅ **Documentation Templates** - All the docs you need, ready to customize  
 ✅ **Multi-IDE Support** - Works with both Windsurf Cascade and Cursor IDE  
@@ -62,11 +80,22 @@ This template provides a complete multi-persona development system with:
 │   ├── changelog.md         # Implementation changes
 │   ├── dependencies.md      # External dependencies
 │   └── glossary.md          # Project terminology
-└── template/                # Clean template for new projects
-    ├── windsurf/            # Windsurf configuration template
-    ├── cursor/              # Cursor configuration template
-    ├── workflow/            # Core workflow documentation
-    ├── docs/                # Project documentation structure
+└── template/
+    ├── bootstrap/
+    │   ├── team-development/
+    │   │   ├── cursor/rules/
+    │   │   ├── windsurf/rules/
+    │   │   ├── docs/
+    │   │   └── workflow/docs/
+    │   └── strict-tdd/
+    │       ├── cursor/rules/
+    │       ├── windsurf/rules/
+    │       ├── docs/
+    │       └── workflow/docs/
+    ├── cursor/rules/
+    ├── windsurf/rules/
+    ├── docs/
+    ├── workflow/docs/
     └── README.md            # Project-specific README template
 ```
 

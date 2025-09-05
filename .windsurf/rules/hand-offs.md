@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Hand-off Protocol
 
 This document defines the baton-passing rules between personas in our mob programming workflow.

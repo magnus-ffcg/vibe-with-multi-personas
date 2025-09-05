@@ -1,0 +1,106 @@
+# Strict Test-Driven Development Workflow
+
+This document defines the workflow process for our strict TDD approach using a single persona transitioning through TDD stages.
+
+## Workflow Overview
+
+All requests begin with the **[TDD_DEVELOPER - RED]** and follow the strict Red-Green-Refactor cycle:
+
+```
+Requirements → RED (Failing Tests) → GREEN (Minimal Code) → REFACTOR (Clean Code) → Complete
+```
+
+## TDD Stage Cycle
+
+### Stage 1: RED - Write Failing Tests
+**Active Stage**: `[TDD_DEVELOPER - RED]`
+- Analyze user requirements and break them down into testable specifications
+- Write failing tests that define the expected behavior
+- Ensure ALL tests fail initially (RED phase validation)
+- Document test cases and expected outcomes in `/docs/test-plan.md`
+- **CRITICAL**: No production code may be written during RED stage
+- **Stage Completion**: All tests are failing and comprehensive
+- **Transition**: Move to GREEN stage when failing tests are complete
+
+### Stage 2: GREEN - Make Tests Pass
+**Active Stage**: `[TDD_DEVELOPER - GREEN]`
+- Write minimal production code to make failing tests pass
+- Focus on making tests green, not on perfect implementation
+- Use the simplest solution that works
+- Update `/docs/changelog.md` with changes
+- **CRITICAL**: Only write code that makes tests pass
+- **Stage Completion**: All tests are passing with minimal code
+- **Transition**: Move to REFACTOR stage when all tests are green
+
+### Stage 3: REFACTOR - Improve Code Quality
+**Active Stage**: `[TDD_DEVELOPER - REFACTOR]`
+- Refactor code while keeping all tests green
+- Improve code structure, readability, and maintainability
+- Apply design patterns and best practices
+- Ensure tests remain green throughout refactoring
+- **Stage Completion**: Code is clean and all tests remain green
+- **Transition**: Hand off to STAKEHOLDER or start next feature cycle
+
+### Stage 4: Stakeholder Review
+**Active Stage**: `[STAKEHOLDER]`
+- Review completed TDD cycle with passing tests
+- Validate requirements are met through test execution
+- **ONLY the Stakeholder can mark features as "Complete"**
+- Approve or request changes
+
+### Stage Enforcement Mechanisms
+- **TDD_DEVELOPER must declare current stage in all messages**
+- **Cannot skip stages in the Red-Green-Refactor cycle**
+- **All tests must be failing before GREEN stage**
+- **All tests must be passing before REFACTOR stage**
+- **Tests must remain green throughout REFACTOR stage**
+
+### Quality Gates by Stage
+
+#### RED Stage Requirements
+- Tests must be comprehensive and cover all acceptance criteria
+- Tests must fail initially (RED phase validation)
+- Tests must have clear, descriptive names
+- Tests must be maintainable and readable
+- **NO production code allowed**
+
+#### GREEN Stage Requirements
+- Code must make tests pass with minimal implementation
+- Focus on functionality, not code quality
+- Use simplest solution that works
+- All tests must pass before stage completion
+
+#### REFACTOR Stage Requirements
+- Refactored code must maintain all tests in green state
+- Code must follow established coding standards
+- Improve structure, readability, and maintainability
+- All changes must be documented in changelog
+
+### Stage Communication Protocol
+1. All messages must include current TDD stage: `[TDD_DEVELOPER - STAGE]`
+2. Stage transitions must be explicitly declared
+3. Stage completion must be documented in `/docs/hand-offs.md`
+4. Test status (failing/passing) must be reported at each transition
+
+### Stage Transition Rules
+- **RED → GREEN**: Only when all tests are failing and comprehensive
+- **GREEN → REFACTOR**: Only when all tests are passing with minimal code
+- **REFACTOR → COMPLETE**: Only when code is clean and tests remain green
+- **Any Stage → RED**: When starting new feature or fixing broken tests
+
+### Blocker Handling by Stage
+- **RED Stage**: If requirements unclear, clarify with stakeholder
+- **GREEN Stage**: If tests cannot pass, return to RED to fix tests
+- **REFACTOR Stage**: If refactoring breaks tests, revert and try different approach
+- Document all blockers with current stage context
+
+## Success Criteria
+
+A TDD cycle is considered successful when:
+1. **RED**: Comprehensive failing tests are written first
+2. **GREEN**: Minimal code makes all tests pass
+3. **REFACTOR**: Code is clean and tests remain green
+4. All acceptance criteria are validated through tests
+5. **Stakeholder has given final approval**
+
+The single-persona TDD approach ensures strict adherence to Red-Green-Refactor while maintaining clear stage boundaries and quality gates.

@@ -2,7 +2,7 @@
 
 # Multi-Persona Development Bootstrap Template - Installer
 # Downloads template files directly from GitHub without requiring git
-# Usage: ./install.sh <github-repo-url> <target-directory> [project-name] [ide]
+# Usage: ./install.sh <github-repo-url> <target-directory> [project-name] [ide] [workflow]
 
 set -e
 
@@ -30,23 +30,41 @@ print_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# Template file manifest - all files needed for the template
-TEMPLATE_FILES=(
+# Template file manifest - files for team-development workflow (backward compatibility)
+TEAM_DEVELOPMENT_FILES=(
     "template/README.md"
-    "template/cursor/rules/hand-offs.mdc"
-    "template/cursor/rules/personas.mdc"
-    "template/cursor/rules/workflow.mdc"
-    "template/docs/changelog.md"
-    "template/docs/dependencies.md"
-    "template/windsurf/rules/hand-offs.md"
-    "template/windsurf/rules/personas.md"
-    "template/windsurf/rules/workflow.md"
-    "template/workflow/docs/backlog.md"
-    "template/workflow/docs/hand-offs.md"
-    "template/workflow/docs/personas.md"
-    "template/workflow/docs/plan.md"
-    "template/workflow/docs/release-notes.md"
-    "template/workflow/docs/workflow.md"
+    "template/bootstrap/team-development/cursor/rules/hand-offs.mdc"
+    "template/bootstrap/team-development/cursor/rules/personas.mdc"
+    "template/bootstrap/team-development/cursor/rules/workflow.mdc"
+    "template/bootstrap/team-development/docs/changelog.md"
+    "template/bootstrap/team-development/docs/dependencies.md"
+    "template/bootstrap/team-development/windsurf/rules/hand-offs.md"
+    "template/bootstrap/team-development/windsurf/rules/personas.md"
+    "template/bootstrap/team-development/windsurf/rules/workflow.md"
+    "template/bootstrap/team-development/workflow/docs/backlog.md"
+    "template/bootstrap/team-development/workflow/docs/hand-offs.md"
+    "template/bootstrap/team-development/workflow/docs/personas.md"
+    "template/bootstrap/team-development/workflow/docs/plan.md"
+    "template/bootstrap/team-development/workflow/docs/release-notes.md"
+    "template/bootstrap/team-development/workflow/docs/workflow.md"
+)
+
+# Template file manifest - files for strict-tdd workflow
+STRICT_TDD_FILES=(
+    "template/README.md"
+    "template/bootstrap/strict-tdd/cursor/rules/hand-offs.mdc"
+    "template/bootstrap/strict-tdd/cursor/rules/personas.mdc"
+    "template/bootstrap/strict-tdd/cursor/rules/workflow.mdc"
+    "template/bootstrap/strict-tdd/docs/changelog.md"
+    "template/bootstrap/strict-tdd/docs/dependencies.md"
+    "template/bootstrap/strict-tdd/windsurf/rules/hand-offs.md"
+    "template/bootstrap/strict-tdd/windsurf/rules/personas.md"
+    "template/bootstrap/strict-tdd/windsurf/rules/workflow.md"
+    "template/bootstrap/strict-tdd/workflow/docs/changelog.md"
+    "template/bootstrap/strict-tdd/workflow/docs/hand-offs.md"
+    "template/bootstrap/strict-tdd/workflow/docs/personas.md"
+    "template/bootstrap/strict-tdd/workflow/docs/test-plan.md"
+    "template/bootstrap/strict-tdd/workflow/docs/workflow.md"
 )
 
 # Function to download a single file
@@ -73,16 +91,38 @@ download_file() {
     return 0
 }
 
+# Function to get template files based on workflow
+get_template_files() {
+    local workflow="$1"
+    
+    case "$workflow" in
+        "team-development")
+            echo "${TEAM_DEVELOPMENT_FILES[@]}"
+            ;;
+        "strict-tdd")
+            echo "${STRICT_TDD_FILES[@]}"
+            ;;
+        *)
+            # Default to team-development for backward compatibility
+            echo "${TEAM_DEVELOPMENT_FILES[@]}"
+            ;;
+    esac
+}
+
 # Function to download all template files
 download_template() {
     local temp_dir="$1"
+    local workflow="$2"
     
-    print_info "Downloading template files from repository..."
+    print_info "Downloading template files for workflow: $workflow"
     
     local downloaded=0
     local failed=0
     
-    for file in "${TEMPLATE_FILES[@]}"; do
+    # Get the appropriate file list for the workflow
+    local template_files=($(get_template_files "$workflow"))
+    
+    for file in "${template_files[@]}"; do
         if download_file "$file" "$temp_dir"; then
             ((downloaded++))
         else
@@ -140,6 +180,7 @@ run_bootstrap() {
     local template_dir="$1"
     local project_name="$3"
     local target_ide="$4"
+    local workflow="$5"
     
     # Ensure target_dir is absolute
     target_dir="$(pwd)"
@@ -158,31 +199,31 @@ run_bootstrap() {
         return 1
     }
     
-    # Copy template files individually to avoid copying the template directory itself
+    # Copy template files individually based on workflow
     if [ -f "$template_dir/template/README.md" ]; then
         cp "$template_dir/template/README.md" "./" || print_warning "Failed to copy README.md"
     fi
     
-    # Create and copy docs files
-    if [ -d "$template_dir/template/docs" ]; then
+    # Create and copy docs files based on workflow
+    if [ -d "$template_dir/template/bootstrap/$workflow/docs" ]; then
         mkdir -p "./docs"
-        cp -r "$template_dir/template/docs/"* "./docs/" 2>/dev/null || true
+        cp -r "$template_dir/template/bootstrap/$workflow/docs/"* "./docs/" 2>/dev/null || true
     fi
     
     # Create and copy workflow files to hidden .workflow directory
-    if [ -d "$template_dir/template/workflow" ]; then
+    if [ -d "$template_dir/template/bootstrap/$workflow/workflow" ]; then
         mkdir -p "./.workflow"
-        cp -r "$template_dir/template/workflow/"* "./.workflow/" 2>/dev/null || true
+        cp -r "$template_dir/template/bootstrap/$workflow/workflow/"* "./.workflow/" 2>/dev/null || true
         # Remove non-hidden workflow directory if it exists
         rm -rf "./workflow" 2>/dev/null || true
     fi
     
-    # Handle IDE-specific files
+    # Handle IDE-specific files based on workflow
     if [ "$target_ide" = "windsurf" ]; then
         # Copy windsurf-specific files to hidden directory
-        if [ -d "$template_dir/template/windsurf" ]; then
+        if [ -d "$template_dir/template/bootstrap/$workflow/windsurf" ]; then
             mkdir -p "./.windsurf"
-            cp -r "$template_dir/template/windsurf/"* "./.windsurf/" 2>/dev/null || true
+            cp -r "$template_dir/template/bootstrap/$workflow/windsurf/"* "./.windsurf/" 2>/dev/null || true
         fi
         # Remove any non-hidden windsurf directory if it exists
         rm -rf "./windsurf" 2>/dev/null || true
@@ -191,9 +232,9 @@ run_bootstrap() {
         rm -rf "./.cursor" 2>/dev/null || true
     elif [ "$target_ide" = "cursor" ]; then
         # Copy cursor-specific files to hidden directory
-        if [ -d "$template_dir/template/cursor" ]; then
+        if [ -d "$template_dir/template/bootstrap/$workflow/cursor" ]; then
             mkdir -p "./.cursor"
-            cp -r "$template_dir/template/cursor/"* "./.cursor/" 2>/dev/null || true
+            cp -r "$template_dir/template/bootstrap/$workflow/cursor/"* "./.cursor/" 2>/dev/null || true
         fi
         # Remove any non-hidden cursor directory if it exists
         rm -rf "./cursor" 2>/dev/null || true
@@ -205,13 +246,21 @@ run_bootstrap() {
     # Change back to original directory
     cd - >/dev/null || true
     
-    # Update project name in README if provided
-    if [ -n "$project_name" ] && [ -f "$target_dir/README.md" ]; then
+    # Update project name and workflow info in README if provided
+    if [ -f "$target_dir/README.md" ]; then
         # Use different sed syntax for macOS and Linux
         if [[ "$(uname)" == "Darwin" ]]; then
-            sed -i '' "s/\[PROJECT_NAME\]/$project_name/g" "$target_dir/README.md"
+            if [ -n "$project_name" ]; then
+                sed -i '' "s/\[PROJECT_NAME\]/$project_name/g" "$target_dir/README.md"
+            fi
+            sed -i '' "s/\[WORKFLOW_NAME\]/$workflow/g" "$target_dir/README.md"
+            sed -i '' "s/\[IDE_NAME\]/$target_ide/g" "$target_dir/README.md"
         else
-            sed -i "s/\[PROJECT_NAME\]/$project_name/g" "$target_dir/README.md"
+            if [ -n "$project_name" ]; then
+                sed -i "s/\[PROJECT_NAME\]/$project_name/g" "$target_dir/README.md"
+            fi
+            sed -i "s/\[WORKFLOW_NAME\]/$workflow/g" "$target_dir/README.md"
+            sed -i "s/\[IDE_NAME\]/$target_ide/g" "$target_dir/README.md"
         fi
     fi
     
@@ -231,20 +280,26 @@ cleanup() {
 
 # Function to show usage
 show_usage() {
-    echo "Multi-Persona Development Template Installer"
+    echo "Development Bootstrap Installer"
     echo ""
     echo "Usage:"
-    echo "  bash <(curl -s URL/install.sh) GITHUB_URL /path/to/new-project [project-name] [ide]"
-    echo "  ./install.sh GITHUB_URL /path/to/new-project [project-name] [ide]"
+    echo "  bash <(curl -s URL/install.sh) [ide] [workflow]"
+    echo "  ./install.sh [ide] [workflow]"
     echo ""
     echo "Arguments:"
-    echo "  /path/to/new-project  Directory where new project will be created"
-    echo "  project-name    Optional project name (defaults to directory name)"
-    echo "  ide             Optional IDE (windsurf, cursor - defaults to auto-detect)"
+    echo "  ide        IDE to configure (windsurf, cursor - defaults to cursor)"
+    echo "  workflow   Workflow to install (team-development, strict-tdd - defaults to team-development)"
+    echo ""
+    echo "Available Workflows:"
+    echo "  team-development  - 6 personas with comprehensive review process"
+    echo "                      ARCHITECT → CODER → TESTER → REVIEWER → QA → STAKEHOLDER"
+    echo "  strict-tdd        - 2 personas with strict Test-Driven Development"
+    echo "                      ARCHITECT → TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER"
     echo ""
     echo "Examples:"
-    echo "  bash <(curl -s URL/install.sh) https://github.com/user/template /tmp/my-project"
-    echo "  ./install.sh https://github.com/user/template.git /home/user/projects/new-app \"My App\" windsurf"
+    echo "  bash <(curl -s URL/install.sh) windsurf team-development"
+    echo "  bash <(curl -s URL/install.sh) cursor strict-tdd"
+    echo "  ./install.sh windsurf strict-tdd"
     echo ""
     echo "Benefits:"
     echo "  - No git dependency required"
@@ -255,16 +310,25 @@ show_usage() {
 
 # Main function
 main() {
-    print_info "Multi-Persona Development Template Installer"
+    print_info "Development Bootstrap Installer"
     print_info "============================================="
     
     # Always use current directory as target
     TARGET_DIR="$(pwd)"
     # Always use $2 as IDE (for curl one-liner)
     TARGET_IDE="${2:-cursor}"  # Default to cursor if not specified
+    # Always use $3 as WORKFLOW (for curl one-liner)
+    TARGET_WORKFLOW="${3:-team-development}"  # Default to team-development if not specified
     
     # Show usage if no IDE specified
     if [ -z "$TARGET_IDE" ] || ! [[ "$TARGET_IDE" =~ ^(windsurf|cursor)$ ]]; then
+        show_usage
+        exit 1
+    fi
+    
+    # Validate workflow parameter
+    if ! [[ "$TARGET_WORKFLOW" =~ ^(team-development|strict-tdd)$ ]]; then
+        print_error "Invalid workflow: $TARGET_WORKFLOW. Must be 'team-development' or 'strict-tdd'"
         show_usage
         exit 1
     fi
@@ -292,10 +356,13 @@ main() {
     if [ -n "$TARGET_IDE" ]; then
         print_info "Target IDE: $TARGET_IDE"
     fi
+    if [ -n "$TARGET_WORKFLOW" ]; then
+        print_info "Target workflow: $TARGET_WORKFLOW"
+    fi
     print_info "Temporary directory: $TEMP_DIR"
     
     # Download template files
-    if ! download_template "$TEMP_DIR"; then
+    if ! download_template "$TEMP_DIR" "$TARGET_WORKFLOW"; then
         print_error "Template download failed"
         exit 1
     fi
@@ -306,7 +373,7 @@ main() {
     fi
     
     # Run bootstrap
-    if ! run_bootstrap "$TEMP_DIR" "$TARGET_DIR" "$PROJECT_NAME" "$TARGET_IDE"; then
+    if ! run_bootstrap "$TEMP_DIR" "$TARGET_DIR" "$PROJECT_NAME" "$TARGET_IDE" "$TARGET_WORKFLOW"; then
         print_error "Bootstrap failed"
         exit 1
     fi
