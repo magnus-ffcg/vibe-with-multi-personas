@@ -284,22 +284,26 @@ show_usage() {
     echo ""
     echo "Usage:"
     echo "  bash <(curl -s URL/install.sh) [flags]"
-    echo "  ./install.sh [flags]"
+    echo "Usage: $0 [--cursor|--windsurf] [--team-development|--team-development-mcp|--strict-tdd]"
     echo ""
-    echo "Flags:"
-    echo "  --cursor           Use Cursor IDE (default)"
-    echo "  --windsurf         Use Windsurf IDE"
-    echo "  --team-development Use team development workflow (default)"
-    echo "  --strict-tdd       Use strict TDD workflow"
+    echo "Options:"
+    echo "  --cursor              Target Cursor IDE (default)"
+    echo "  --windsurf            Target Windsurf IDE"
+    echo "  --team-development    Use team development workflow (default)"
+    echo "  --team-development-mcp Use team development workflow with MCP coordinator (Windsurf only)"
+    echo "  --strict-tdd          Use strict TDD workflow"
     echo ""
     echo "Available Workflows:"
-    echo "  team-development  - 6 personas with comprehensive review process"
-    echo "                      ARCHITECT → CODER → TESTER → REVIEWER → QA → STAKEHOLDER"
-    echo "  strict-tdd        - 3 personas with strict Test-Driven Development"
-    echo "                      ARCHITECT → TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER"
+    echo "  team-development     - 6 personas with comprehensive review process"
+    echo "                         ARCHITECT → CODER → TESTER → REVIEWER → QA → STAKEHOLDER"
+    echo "  team-development-mcp - Same as team-development but with MCP coordinator server"
+    echo "                         Uses MCP tools for state management (Windsurf only)"
+    echo "  strict-tdd           - 3 personas with strict Test-Driven Development"
+    echo "                         ARCHITECT → TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER"
     echo ""
     echo "Examples:"
     echo "  bash <(curl -s URL/install.sh) --windsurf --team-development"
+    echo "  bash <(curl -s URL/install.sh) --windsurf --team-development-mcp"
     echo "  bash <(curl -s URL/install.sh) --cursor --strict-tdd"
     echo "  bash <(curl -s URL/install.sh) --strict-tdd"
     echo "  ./install.sh --windsurf --strict-tdd"
@@ -333,6 +337,9 @@ main() {
             --team-development)
                 TARGET_WORKFLOW="team-development"
                 ;;
+            --team-development-mcp)
+                TARGET_WORKFLOW="team-development-mcp"
+                ;;
             --strict-tdd)
                 TARGET_WORKFLOW="strict-tdd"
                 ;;
@@ -351,8 +358,16 @@ main() {
     fi
     
     # Validate workflow parameter
-    if ! [[ "$TARGET_WORKFLOW" =~ ^(team-development|strict-tdd)$ ]]; then
-        print_error "Invalid workflow: $TARGET_WORKFLOW. Must be 'team-development' or 'strict-tdd'"
+    if ! [[ "$TARGET_WORKFLOW" =~ ^(team-development|team-development-mcp|strict-tdd)$ ]]; then
+        print_error "Invalid workflow: $TARGET_WORKFLOW. Must be 'team-development', 'team-development-mcp', or 'strict-tdd'"
+        show_usage
+        exit 1
+    fi
+    
+    # Validate team-development-mcp is only used with Windsurf
+    if [ "$TARGET_WORKFLOW" = "team-development-mcp" ] && [ "$TARGET_IDE" != "windsurf" ]; then
+        print_error "team-development-mcp workflow is only supported with Windsurf IDE"
+        print_error "Use --windsurf --team-development-mcp"
         show_usage
         exit 1
     fi

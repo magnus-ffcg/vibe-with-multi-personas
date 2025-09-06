@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "mcp-coordinator": {
+      "command": "node",
+      "args": ["./mcp-coordinator/dist/index.js"],
+      "cwd": "."
+    }
+  }
+}
