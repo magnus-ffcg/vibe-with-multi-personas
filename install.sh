@@ -67,6 +67,30 @@ STRICT_TDD_FILES=(
     "template/bootstrap/strict-tdd/workflow/docs/workflow.md"
 )
 
+# Template file manifest - files for team-development-mcp workflow
+TEAM_DEVELOPMENT_MCP_FILES=(
+    "template/README.md"
+    "template/bootstrap/team-development-mcp/README.md"
+    "template/bootstrap/team-development-mcp/docs/changelog.md"
+    "template/bootstrap/team-development-mcp/docs/dependencies.md"
+    "template/bootstrap/team-development-mcp/windsurf/mcp_servers.json"
+    "template/bootstrap/team-development-mcp/windsurf/rules/hand-offs.md"
+    "template/bootstrap/team-development-mcp/windsurf/rules/personas.md"
+    "template/bootstrap/team-development-mcp/windsurf/rules/workflow.md"
+    "template/bootstrap/team-development-mcp/workflow/docs/backlog.md"
+    "template/bootstrap/team-development-mcp/workflow/docs/hand-offs.md"
+    "template/bootstrap/team-development-mcp/workflow/docs/personas.md"
+    "template/bootstrap/team-development-mcp/workflow/docs/plan.md"
+    "template/bootstrap/team-development-mcp/workflow/docs/release-notes.md"
+    "template/bootstrap/team-development-mcp/workflow/docs/workflow.md"
+    "mcp-coordinator/README.md"
+    "mcp-coordinator/package.json"
+    "mcp-coordinator/tsconfig.json"
+    "mcp-coordinator/src/index.ts"
+    "mcp-coordinator/src/storage.ts"
+    "mcp-coordinator/src/types.ts"
+)
+
 # Function to download a single file
 download_file() {
     local repo_url="https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main"
@@ -98,6 +122,9 @@ get_template_files() {
     case "$workflow" in
         "team-development")
             echo "${TEAM_DEVELOPMENT_FILES[@]}"
+            ;;
+        "team-development-mcp")
+            echo "${TEAM_DEVELOPMENT_MCP_FILES[@]}"
             ;;
         "strict-tdd")
             echo "${STRICT_TDD_FILES[@]}"
@@ -225,6 +252,21 @@ run_bootstrap() {
             mkdir -p "./.windsurf"
             cp -r "$template_dir/template/bootstrap/$workflow/windsurf/"* "./.windsurf/" 2>/dev/null || true
         fi
+        
+        # Install MCP coordinator server for team-development-mcp workflow
+        if [ "$workflow" = "team-development-mcp" ]; then
+            print_info "Installing MCP coordinator server..."
+            if [ -d "$template_dir/mcp-coordinator" ]; then
+                cp -r "$template_dir/mcp-coordinator" "./" || {
+                    print_error "Failed to copy MCP coordinator server"
+                    return 1
+                }
+                print_success "MCP coordinator server installed"
+            else
+                print_warning "MCP coordinator server not found in template"
+            fi
+        fi
+        
         # Remove any non-hidden windsurf directory if it exists
         rm -rf "./windsurf" 2>/dev/null || true
         # Remove cursor directories if they exist
@@ -245,6 +287,22 @@ run_bootstrap() {
     
     # Change back to original directory
     cd - >/dev/null || true
+    
+    # Handle MCP coordinator server setup for team-development-mcp workflow
+    if [ "$workflow" = "team-development-mcp" ]; then
+        print_info "Setting up MCP coordinator server..."
+        if [ -d "./mcp-coordinator" ]; then
+            # Check if npm is available
+            if command -v npm >/dev/null 2>&1; then
+                print_info "Installing MCP coordinator dependencies..."
+                cd "./mcp-coordinator" && npm install && npm run build && cd - >/dev/null || {
+                    print_warning "Failed to build MCP coordinator server. You'll need to run 'npm install && npm run build' manually in the mcp-coordinator directory."
+                }
+            else
+                print_warning "npm not found. Please install Node.js and run 'npm install && npm run build' in the mcp-coordinator directory."
+            fi
+        fi
+    fi
     
     # Update project name and workflow info in README if provided
     if [ -f "$target_dir/README.md" ]; then
@@ -421,6 +479,22 @@ main() {
     print_info ""
     print_info "Next steps:"
     print_info ""
+    
+    # Show MCP-specific instructions for team-development-mcp workflow
+    if [ "$TARGET_WORKFLOW" = "team-development-mcp" ]; then
+        print_info "MCP Coordinator Setup:"
+        print_info "1. The MCP coordinator server has been installed in ./mcp-coordinator/"
+        if command -v npm >/dev/null 2>&1; then
+            print_info "2. Dependencies installed and server built automatically"
+        else
+            print_info "2. Install Node.js, then run: cd mcp-coordinator && npm install && npm run build"
+        fi
+        print_info "3. The MCP server is configured in .windsurf/mcp_servers.json"
+        print_info "4. Restart Windsurf to load the MCP server configuration"
+        print_info "5. Use MCP tools: create_plan, add_task, create_handoff, etc."
+        print_info ""
+    fi
+    
     print_info "Start typing your requests..."
     print_info ""
     print_info "Happy multi-persona development! 🚀"

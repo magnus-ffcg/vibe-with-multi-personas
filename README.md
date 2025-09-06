@@ -14,6 +14,11 @@ bash -c "$(curl -fsSL \
     'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
     -- --cursor --team-development
 
+# Team Development with MCP Coordinator (Windsurf only)
+bash -c "$(curl -fsSL \
+    'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
+    -- --windsurf --team-development-mcp
+
 # Strict TDD Workflow (3 personas with TDD stages)
 bash -c "$(curl -fsSL \
     'https://raw.githubusercontent.com/magnus-ffcg/vibe-with-multi-personas/refs/heads/main/install.sh')" \
@@ -52,6 +57,13 @@ bash -c "$(curl -fsSL \
 - **Quality Gates**: Architecture design, code review, testing, QA validation
 - **Documentation**: Full ADR process, detailed planning, comprehensive tracking
 
+### Team Development with MCP Coordinator (6 Personas + MCP Server)
+**ARCHITECT → CODER → TESTER → REVIEWER → QA → STAKEHOLDER**
+- **Focus**: Same as Team Development but with centralized state management
+- **Best for**: Windsurf projects requiring real-time workflow coordination
+- **MCP Features**: Centralized plan/backlog/handoffs storage, real-time state tracking
+- **Requirements**: Windsurf IDE only, includes MCP server setup
+
 ### Strict TDD (3 Personas)  
 **ARCHITECT → TDD_DEVELOPER [RED → GREEN → REFACTOR] → STAKEHOLDER**
 - **Focus**: Architecture planning with strict Test-Driven Development cycle
@@ -63,18 +75,27 @@ bash -c "$(curl -fsSL \
 
 This template provides a complete multi-persona development system with:
 
-✅ **Multiple Workflows** - Choose between comprehensive review or strict TDD  
+✅ **Multiple Workflows** - Choose between comprehensive review, MCP-coordinated, or strict TDD  
 ✅ **Structured Process** - Proven pipelines from idea to completion  
 ✅ **Quality Gates** - Multiple checkpoints ensure high-quality output  
 ✅ **Documentation Templates** - All the docs you need, ready to customize  
 ✅ **Multi-IDE Support** - Works with both Windsurf Cascade and Cursor IDE  
 ✅ **IDE-Specific Configuration** - Optimized rules and workflows for each IDE  
+✅ **MCP Integration** - Optional centralized state management with MCP coordinator server  
 
 ## File Structure
 
 ```
 ├── README.md                # This file - overview and quick start
 ├── install.sh               # One-command installer (no git required)
+├── mcp-coordinator/         # MCP server for workflow state management
+│   ├── src/
+│   │   ├── index.ts         # Main MCP server implementation
+│   │   ├── storage.ts       # Persistent state storage
+│   │   └── types.ts         # TypeScript type definitions
+│   ├── package.json         # Node.js dependencies and scripts
+│   ├── tsconfig.json        # TypeScript configuration
+│   └── README.md            # MCP server documentation
 ├── .windsurf/               # Windsurf Cascade IDE configuration
 │   └── rules/
 │       ├── personas.md      # Windsurf-specific persona definitions
@@ -104,6 +125,12 @@ This template provides a complete multi-persona development system with:
     │   │   ├── windsurf/rules/
     │   │   ├── docs/
     │   │   └── workflow/docs/
+    │   ├── team-development-mcp/  # MCP-coordinated workflow
+    │   │   ├── windsurf/
+    │   │   │   ├── rules/
+    │   │   │   └── mcp_servers.json
+    │   │   ├── docs/
+    │   │   └── workflow/docs/
     │   └── strict-tdd/
     │       ├── cursor/rules/
     │       ├── windsurf/rules/
@@ -122,6 +149,7 @@ This template provides a complete multi-persona development system with:
 - **AI Pair Programming**: Optimized for Cascade's collaborative AI features
 - **Context Awareness**: Rules designed for Windsurf's workspace understanding
 - **Tool Integration**: Leverages Windsurf's built-in development tools
+- **MCP Support**: Optional MCP coordinator server for centralized state management
 - **Configuration**: `.windsurf/rules/` contains Windsurf-specific workflow adaptations
 
 ### Cursor IDE
