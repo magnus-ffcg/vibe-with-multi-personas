@@ -167,36 +167,57 @@ download_template() {
     return 0
 }
 
-# Function to validate template structure
-validate_template() {
-    local template_dir="$1"
+# Function to validate installation in target directory
+validate_installation() {
+    local target_dir="$1"
+    local workflow="$2"
     
-    print_info "Validating template structure..."
+    print_info "Validating installation for workflow: $workflow"
     
-    # Check for required files
-    local required_files=(
-        "template/workflow/docs/personas.md"
-        "template/cursor/rules/personas.mdc"
-    )
+    # Check for workflow-specific required files in target directory
+    local required_files=()
+    case "$workflow" in
+        "team-development")
+            required_files=(
+                ".workflow/docs/personas.md"
+                "README.md"
+            )
+            ;;
+        "team-development-mcp")
+            required_files=(
+                ".workflow/docs/personas.md"
+                ".windsurf/mcp_servers.json"
+                "mcp-coordinator/package.json"
+                "README.md"
+            )
+            ;;
+        "strict-tdd")
+            required_files=(
+                ".workflow/docs/personas.md"
+                "README.md"
+            )
+            ;;
+        *)
+            # Default validation
+            required_files=(
+                "README.md"
+            )
+            ;;
+    esac
     
     local missing=0
     for file in "${required_files[@]}"; do
-        if [ ! -f "$template_dir/$file" ]; then
-            print_warning "Template may be incomplete - missing: $file"
+        if [ ! -f "$target_dir/$file" ]; then
+            print_warning "Installation may be incomplete - missing: $file"
             ((missing++))
         fi
     done
     
-    # Check if bootstrap.sh is executable
-    if [ -f "$template_dir/bootstrap.sh" ]; then
-        chmod +x "$template_dir/bootstrap.sh"
-        print_info "Made bootstrap.sh executable"
-    fi
-    
     if [ $missing -eq 0 ]; then
-        print_success "Template validation complete - all required files present"
+        print_success "Installation validation complete - all required files present"
     else
-        print_warning "Template validation complete - $missing files missing"
+        print_warning "Installation validation complete - $missing files missing"
+        return 1
     fi
     
     return 0
@@ -464,15 +485,15 @@ main() {
         exit 1
     fi
     
-    # Validate template
-    if ! validate_template "$TEMP_DIR"; then
-        print_warning "Template validation had warnings, but continuing..."
-    fi
-    
     # Run bootstrap
     if ! run_bootstrap "$TEMP_DIR" "$TARGET_DIR" "$PROJECT_NAME" "$TARGET_IDE" "$TARGET_WORKFLOW"; then
         print_error "Bootstrap failed"
         exit 1
+    fi
+    
+    # Validate installation in target directory
+    if ! validate_installation "$TARGET_DIR" "$TARGET_WORKFLOW"; then
+        print_warning "Installation validation had warnings, but continuing..."
     fi
     
     print_success "Installation complete!"

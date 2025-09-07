@@ -38,7 +38,7 @@ When adding new tasks, use this format:
 
 ## Completed Tasks
 
-*Completed tasks are moved to /.workflow/docs/release-notes.md*
+*Completed tasks are tracked via MCP coordinator handoffs history*
 
 ---
 

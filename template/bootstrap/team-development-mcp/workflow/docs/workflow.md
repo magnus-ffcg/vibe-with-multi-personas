@@ -20,13 +20,13 @@ Backlog → In Progress → Coded → Tested → Reviewed → QA → Ready for S
 ## Task Lifecycle
 
 ### 1. Backlog Management
-- Tasks start in `.workflow/docs/backlog.md`
+- Tasks managed via MCP `add_task` and `update_task` tools
 - [ARCHITECT] creates and prioritizes tasks
 - Clear acceptance criteria required for each task
 
 ### 2. Implementation Phase
 - [ARCHITECT] moves task to "In Progress"
-- Designs solution and documents in `.workflow/docs/plan.md`
+- Designs solution and documents using MCP `create_plan` tool
 - Hands off to [CODER] with clear specifications
 
 ### 3. Development Phase
@@ -38,19 +38,19 @@ Backlog → In Progress → Coded → Tested → Reviewed → QA → Ready for S
 ### 4. Testing Phase
 - [TESTER] writes comprehensive tests
 - Aims for ~80% coverage
-- Updates `.workflow/docs/test-plan.md` and `.workflow/docs/test-report.md`
+- Updates test documentation via MCP coordinator
 - Hands off to [REVIEWER]
 
 ### 5. Review Phase
 - [REVIEWER] assesses code quality and maintainability
-- Updates `.workflow/docs/review-checklist.md`
+- Documents review feedback via MCP coordinator
 - Provides feedback and approval
 - Hands off to [QA]
 
 ### 6. Quality Assurance
 - [QA] validates against acceptance criteria
 - Performs end-to-end testing
-- Updates `.workflow/docs/release-notes.md`
+- Updates task status using MCP `update_task` tool
 - Marks as "Ready for Stakeholder"
 
 ### 7. Stakeholder Approval
@@ -71,7 +71,7 @@ All personas must prefix messages with their role:
 
 ### Hand-off Protocol
 1. Update relevant documentation
-2. Add hand-off note in `.workflow/docs/hand-offs.md`
+2. Create hand-off using MCP `create_handoff` tool
 3. State what was completed and next steps
 4. Tag the next persona
 
@@ -87,10 +87,11 @@ Each phase has specific quality requirements:
 
 ## Documentation Requirements
 
-- `.workflow/docs/plan.md` - Project design and architecture
-- `.workflow/docs/backlog.md` - Task management
-- `.workflow/docs/hand-offs.md` - Persona transitions
-- `.workflow/docs/release-notes.md` - Completed work tracking
+- MCP coordinator resources - Centralized state management
+  - `plan://current` - Project design and architecture
+  - `backlog://current` - Task management
+  - `handoffs://current` - Active persona transitions
+  - `handoffs://history` - Completed work tracking
 - `docs/changelog.md` - Code changes
 - `docs/adr/` - Architectural decision records
 

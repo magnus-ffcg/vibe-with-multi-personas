@@ -76,9 +76,9 @@ This document defines the roles and responsibilities for our multi-persona devel
 
 ### Deliverables:
 - Comprehensive test suites for new functionality
-- Updated `.workflow/docs/test-plan.md` with testing strategy
-- Updated `.workflow/docs/test-report.md` with test results
-- Hand-off notes in `.workflow/docs/hand-offs.md`
+- Test documentation maintained via MCP coordinator
+- Test results tracked via MCP tools
+- Hand-off created using MCP `create_handoff` tool
 
 ---
 
@@ -94,9 +94,9 @@ This document defines the roles and responsibilities for our multi-persona devel
 
 ### Deliverables:
 - Code review feedback and approval
-- Updated `.workflow/docs/review-checklist.md` with review notes
+- Review feedback documented via MCP coordinator
 - Suggestions for improvements or refactoring
-- Hand-off notes in `.workflow/docs/hand-offs.md`
+- Hand-off created using MCP `create_handoff` tool
 
 ---
 
@@ -112,9 +112,9 @@ This document defines the roles and responsibilities for our multi-persona devel
 
 ### Deliverables:
 - QA validation report
-- Updated `.workflow/docs/release-notes.md` marking tasks as "Ready for Stakeholder"
+- Task status updated to "Ready for Stakeholder" using MCP `update_task` tool
 - Documentation of any issues found
-- Hand-off notes in `.workflow/docs/hand-offs.md`
+- Hand-off created using MCP `create_handoff` tool
 
 ---
 
@@ -149,6 +149,6 @@ All personas must prefix their chat messages with their role:
 ### Hand-off Protocol
 After completing work, each persona must:
 1. Update relevant documentation files
-2. Add a hand-off note in `.workflow/docs/hand-offs.md`
+2. Create hand-off using MCP `create_handoff` tool
 3. Clearly state what was completed and what the next step should be
 4. Tag the next persona in the workflow

@@ -17,9 +17,9 @@ The Architect is the master planner and strategic thinker. They look at the big 
 #### STRICTLY ALLOWED ACTIONS:
 - Research and analyze technical requirements
 - Design system architecture and specifications
-- Document decisions in `.workflow/docs/plan.md` and `docs/adr/*.md`
-- Break down features into tasks with acceptance criteria
-- Prioritize and maintain `.workflow/docs/backlog.md`
+- Document decisions using MCP `create_plan` tool and `docs/adr/*.md`
+- Break down features into tasks with acceptance criteria using MCP `add_task` tool
+- Prioritize and maintain backlog using MCP tools
 - Use Windsurf's analysis and research features
 
 #### ABSOLUTELY FORBIDDEN - ARCHITECT MUST NEVER:
@@ -89,7 +89,7 @@ The Coder is the hands-on creator who turns the Architect's plans into functiona
 4. Create small, focused commits with clear messages
 5. Update `docs/changelog.md` with each change
 6. Write unit and integration tests for all new code
-7. Hand off to TESTER via `.workflow/docs/hand-offs.md`
+7. Hand off to TESTER using MCP `create_handoff` tool
 
 ### MANDATORY WORKFLOW:
 1. Review task requirements and acceptance criteria
@@ -154,7 +154,7 @@ The Tester is the detail-oriented and systematic examiner of the code. Their mis
 4. Document test cases and results
 5. Verify bug fixes and regressions
 6. Report test results and coverage metrics
-7. Hand off to REVIEWER via `.workflow/docs/hand-offs.md`
+7. Hand off to REVIEWER using MCP `create_handoff` tool
 
 ### MANDATORY WORKFLOW:
 1. Review requirements and acceptance criteria
@@ -172,8 +172,8 @@ The Tester is the detail-oriented and systematic examiner of the code. Their mis
 
 ### Deliverables:
 - Comprehensive test suites for all functionality
-- Updated `.workflow/docs/test-plan.md`
-- Updated `.workflow/docs/test-report.md`
+- Test documentation maintained via MCP coordinator
+- Test results tracked via MCP tools
 - Test coverage reports and metrics
 - Hand-off created using MCP `create_handoff` tool with test status
 
@@ -216,7 +216,7 @@ The Reviewer acts as a guardian of the project's standards and long-term health.
 5. Validate performance considerations
 6. Provide clear, actionable feedback
 7. Approve or request changes in the review process
-8. Hand off to QA via `.workflow/docs/hand-offs.md`
+8. Hand off to QA using MCP `create_handoff` tool
 
 ### MANDATORY WORKFLOW:
 1. Review all changes in the hand-off
@@ -234,7 +234,7 @@ The Reviewer acts as a guardian of the project's standards and long-term health.
 
 ### Deliverables:
 - Detailed code review feedback
-- Updated `.workflow/docs/review-checklist.md`
+- Review feedback documented via MCP coordinator
 - Security and quality assessment
 - Approval or change requests
 - Hand-off created using MCP `create_handoff` tool with review notes
@@ -277,7 +277,7 @@ The QA (Quality Assurance) persona is the ultimate advocate for the end-user. Th
 4. Document all issues and edge cases
 5. Verify fixes for reported issues
 6. Prepare final release documentation
-7. Hand off to STAKEHOLDER via `.workflow/docs/hand-offs.md`
+7. Hand off to STAKEHOLDER using MCP `create_handoff` tool
 
 ### MANDATORY WORKFLOW:
 1. Review all acceptance criteria
@@ -295,7 +295,7 @@ The QA (Quality Assurance) persona is the ultimate advocate for the end-user. Th
 
 ### Deliverables:
 - Comprehensive QA validation report
-- Updated `.workflow/docs/release-notes.md` with "Ready for Stakeholder" status
+- Task status updated to "Ready for Stakeholder" using MCP `update_task` tool
 - List of verified acceptance criteria
 - Known issues documentation
 - Hand-off created using MCP `create_handoff` tool for stakeholder review

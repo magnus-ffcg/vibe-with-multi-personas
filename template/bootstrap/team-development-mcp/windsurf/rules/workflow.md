@@ -38,7 +38,7 @@ Backlog → In Progress → Coded → Tested → Reviewed → QA → Ready for S
 - ARCHITECT → CODER (no exceptions)
 - All implementation work must flow through CODER
 - No persona can bypass CODER for code changes
-- Hand-offs must be documented in `.workflow/docs/hand-offs.md`
+- Hand-offs must be created using MCP `create_handoff` tool
 
 ## Windsurf Cascade Integration
 
@@ -104,8 +104,8 @@ Backlog → In Progress → Coded → Tested → Reviewed → QA → Ready for S
 
 **Deliverables**:
 - Test suites for new functionality
-- Updated `.workflow/docs/test-plan.md`
-- Updated `.workflow/docs/test-report.md`
+- Test documentation maintained via MCP coordinator
+- Test results tracked via MCP tools
 - Hand-off notes
 
 **Windsurf Features**: Integrated testing tools, AI test generation, debugging support
@@ -121,7 +121,7 @@ Backlog → In Progress → Coded → Tested → Reviewed → QA → Ready for S
 
 **Deliverables**:
 - Code review feedback and approval
-- Updated `.workflow/docs/review-checklist.md`
+- Review feedback documented via MCP coordinator
 - Improvement suggestions
 - Hand-off notes
 
@@ -138,7 +138,7 @@ Backlog → In Progress → Coded → Tested → Reviewed → QA → Ready for S
 
 **Deliverables**:
 - QA validation report
-- Updated `.workflow/docs/release-notes.md`
+- Task status updated using MCP `update_task` tool
 - Issue documentation
 - Hand-off notes
 
@@ -168,7 +168,7 @@ Each persona must document:
 - Windsurf-specific features used
 
 ### File Organization
-- `.workflow/docs/` - Core workflow documentation
+- MCP coordinator - Centralized workflow state management
 - `docs/` - Project-specific documentation
 - `docs/adr/` - Architecture Decision Records
 
