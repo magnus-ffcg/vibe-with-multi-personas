@@ -13,47 +13,67 @@ The MCP Coordinator replaces file-based communication between personas with a ce
 
 ## Installation
 
+### Option 1: From npm (Easiest - after publishing)
+
 ```bash
-cd mcp-coordinator
+# No installation needed - use directly with npx
+```
+
+### Option 2: Local Development
+
+```bash
+git clone https://github.com/magnuseriksson/windsurf-rules.git
+cd windsurf-rules/mcp-coordinator
 npm install
 npm run build
+npm link  # Makes it available globally
+```
+
+### Option 3: Direct Installation
+
+```bash
+npm install -g mcp-coordinator  # After publishing to npm
 ```
 
 ## Usage
-
-### Starting the Server
-
-```bash
-npm start
-```
-
-The server runs on stdio and can be configured as an MCP server in your IDE.
 
 ### MCP Configuration
 
 Add to your IDE's MCP configuration:
 
-**Windsurf (.windsurf/mcp_servers.json):**
+**Windsurf (~/.codeium/mcp_config.json):**
 ```json
 {
   "mcpServers": {
     "mcp-coordinator": {
-      "command": "node",
-      "args": ["/path/to/mcp-coordinator/dist/index.js"],
-      "cwd": "/path/to/your/project"
+      "command": "npx",
+      "args": ["-y", "mcp-coordinator"]
     }
   }
 }
 ```
 
-**Cursor (.cursor/mcp_servers.json):**
+**Claude Desktop (claude_desktop_config.json):**
 ```json
 {
   "mcpServers": {
     "mcp-coordinator": {
-      "command": "node",
-      "args": ["/path/to/mcp-coordinator/dist/index.js"],
-      "cwd": "/path/to/your/project"
+      "command": "npx",
+      "args": ["-y", "mcp-coordinator"]
+    }
+  }
+}
+```
+
+### Alternative: Direct Installation
+
+If you installed globally:
+
+```json
+{
+  "mcpServers": {
+    "mcp-coordinator": {
+      "command": "mcp-coordinator"
     }
   }
 }

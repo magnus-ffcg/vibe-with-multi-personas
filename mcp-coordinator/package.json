@@ -4,10 +4,19 @@
   "description": "MCP server for coordinating multi-persona development workflow state",
   "main": "dist/index.js",
   "type": "module",
+  "bin": {
+    "mcp-coordinator": "dist/index.js"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc --watch & node --watch dist/index.js"
+    "dev": "tsc --watch & node --watch dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magnuseriksson/windsurf-rules.git",
+    "directory": "mcp-coordinator"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.5.0"
@@ -16,7 +25,21 @@
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0"
   },
-  "keywords": ["mcp", "workflow", "coordination", "personas"],
+  "keywords": [
+    "mcp",
+    "workflow",
+    "coordination",
+    "personas",
+    "model-context-protocol"
+  ],
   "author": "Multi-Persona Development System",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "package.json"
+  ]
 }
