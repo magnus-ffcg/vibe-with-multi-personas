@@ -1,0 +1,656 @@
+{
+  "currentPersona": "ARCHITECT",
+  "tasks": [],
+  "handOffs": [
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 0"
+      ],
+      "nextSteps": [
+        "Step 0"
+      ],
+      "notes": "Notes 0",
+      "id": "handoff-1757249231682-l72i0si9s",
+      "timestamp": "2025-09-07T12:47:11.682Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 1"
+      ],
+      "nextSteps": [
+        "Step 1"
+      ],
+      "notes": "Notes 1",
+      "id": "handoff-1757249231683-hevursazu",
+      "timestamp": "2025-09-07T12:47:11.683Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 2"
+      ],
+      "nextSteps": [
+        "Step 2"
+      ],
+      "notes": "Notes 2",
+      "id": "handoff-1757249231683-076qxo9s8",
+      "timestamp": "2025-09-07T12:47:11.683Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 3"
+      ],
+      "nextSteps": [
+        "Step 3"
+      ],
+      "notes": "Notes 3",
+      "id": "handoff-1757249231684-j40ypf8kg",
+      "timestamp": "2025-09-07T12:47:11.684Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 4"
+      ],
+      "nextSteps": [
+        "Step 4"
+      ],
+      "notes": "Notes 4",
+      "id": "handoff-1757249231684-c3vcorg0o",
+      "timestamp": "2025-09-07T12:47:11.684Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 5"
+      ],
+      "nextSteps": [
+        "Step 5"
+      ],
+      "notes": "Notes 5",
+      "id": "handoff-1757249231684-immt5fph1",
+      "timestamp": "2025-09-07T12:47:11.684Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 6"
+      ],
+      "nextSteps": [
+        "Step 6"
+      ],
+      "notes": "Notes 6",
+      "id": "handoff-1757249231685-lv4gf23tq",
+      "timestamp": "2025-09-07T12:47:11.685Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 7"
+      ],
+      "nextSteps": [
+        "Step 7"
+      ],
+      "notes": "Notes 7",
+      "id": "handoff-1757249231685-gsb9mfdog",
+      "timestamp": "2025-09-07T12:47:11.685Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 8"
+      ],
+      "nextSteps": [
+        "Step 8"
+      ],
+      "notes": "Notes 8",
+      "id": "handoff-1757249231685-ynhh3smao",
+      "timestamp": "2025-09-07T12:47:11.685Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 9"
+      ],
+      "nextSteps": [
+        "Step 9"
+      ],
+      "notes": "Notes 9",
+      "id": "handoff-1757249231686-sv3sjs7n5",
+      "timestamp": "2025-09-07T12:47:11.686Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 10"
+      ],
+      "nextSteps": [
+        "Step 10"
+      ],
+      "notes": "Notes 10",
+      "id": "handoff-1757249231686-qqka3ypyc",
+      "timestamp": "2025-09-07T12:47:11.686Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 11"
+      ],
+      "nextSteps": [
+        "Step 11"
+      ],
+      "notes": "Notes 11",
+      "id": "handoff-1757249231689-hvy9aieof",
+      "timestamp": "2025-09-07T12:47:11.689Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 12"
+      ],
+      "nextSteps": [
+        "Step 12"
+      ],
+      "notes": "Notes 12",
+      "id": "handoff-1757249231690-84040uiwu",
+      "timestamp": "2025-09-07T12:47:11.690Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 13"
+      ],
+      "nextSteps": [
+        "Step 13"
+      ],
+      "notes": "Notes 13",
+      "id": "handoff-1757249231690-ied85kcdk",
+      "timestamp": "2025-09-07T12:47:11.690Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 14"
+      ],
+      "nextSteps": [
+        "Step 14"
+      ],
+      "notes": "Notes 14",
+      "id": "handoff-1757249231691-0cedo38id",
+      "timestamp": "2025-09-07T12:47:11.691Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 15"
+      ],
+      "nextSteps": [
+        "Step 15"
+      ],
+      "notes": "Notes 15",
+      "id": "handoff-1757249231691-5jyomfweb",
+      "timestamp": "2025-09-07T12:47:11.691Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 16"
+      ],
+      "nextSteps": [
+        "Step 16"
+      ],
+      "notes": "Notes 16",
+      "id": "handoff-1757249231691-7kyhsxw2i",
+      "timestamp": "2025-09-07T12:47:11.691Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 17"
+      ],
+      "nextSteps": [
+        "Step 17"
+      ],
+      "notes": "Notes 17",
+      "id": "handoff-1757249231691-an6jdkpx0",
+      "timestamp": "2025-09-07T12:47:11.691Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 18"
+      ],
+      "nextSteps": [
+        "Step 18"
+      ],
+      "notes": "Notes 18",
+      "id": "handoff-1757249231691-66ucstksq",
+      "timestamp": "2025-09-07T12:47:11.691Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 19"
+      ],
+      "nextSteps": [
+        "Step 19"
+      ],
+      "notes": "Notes 19",
+      "id": "handoff-1757249231692-uov3yjdxs",
+      "timestamp": "2025-09-07T12:47:11.692Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 20"
+      ],
+      "nextSteps": [
+        "Step 20"
+      ],
+      "notes": "Notes 20",
+      "id": "handoff-1757249231692-9fxtfuxx1",
+      "timestamp": "2025-09-07T12:47:11.692Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 21"
+      ],
+      "nextSteps": [
+        "Step 21"
+      ],
+      "notes": "Notes 21",
+      "id": "handoff-1757249231692-nzpwri0cb",
+      "timestamp": "2025-09-07T12:47:11.692Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 22"
+      ],
+      "nextSteps": [
+        "Step 22"
+      ],
+      "notes": "Notes 22",
+      "id": "handoff-1757249231692-3skb0cfyc",
+      "timestamp": "2025-09-07T12:47:11.692Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 23"
+      ],
+      "nextSteps": [
+        "Step 23"
+      ],
+      "notes": "Notes 23",
+      "id": "handoff-1757249231692-puel076s2",
+      "timestamp": "2025-09-07T12:47:11.692Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 24"
+      ],
+      "nextSteps": [
+        "Step 24"
+      ],
+      "notes": "Notes 24",
+      "id": "handoff-1757249231693-eeidohw68",
+      "timestamp": "2025-09-07T12:47:11.693Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 25"
+      ],
+      "nextSteps": [
+        "Step 25"
+      ],
+      "notes": "Notes 25",
+      "id": "handoff-1757249231693-5azproztg",
+      "timestamp": "2025-09-07T12:47:11.693Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 26"
+      ],
+      "nextSteps": [
+        "Step 26"
+      ],
+      "notes": "Notes 26",
+      "id": "handoff-1757249231693-aim58mjzs",
+      "timestamp": "2025-09-07T12:47:11.693Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 27"
+      ],
+      "nextSteps": [
+        "Step 27"
+      ],
+      "notes": "Notes 27",
+      "id": "handoff-1757249231693-kvt3xq3fw",
+      "timestamp": "2025-09-07T12:47:11.693Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 28"
+      ],
+      "nextSteps": [
+        "Step 28"
+      ],
+      "notes": "Notes 28",
+      "id": "handoff-1757249231693-7e6sa19kg",
+      "timestamp": "2025-09-07T12:47:11.693Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 29"
+      ],
+      "nextSteps": [
+        "Step 29"
+      ],
+      "notes": "Notes 29",
+      "id": "handoff-1757249231694-6wy7esml3",
+      "timestamp": "2025-09-07T12:47:11.694Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 30"
+      ],
+      "nextSteps": [
+        "Step 30"
+      ],
+      "notes": "Notes 30",
+      "id": "handoff-1757249231694-s6wu347tz",
+      "timestamp": "2025-09-07T12:47:11.694Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 31"
+      ],
+      "nextSteps": [
+        "Step 31"
+      ],
+      "notes": "Notes 31",
+      "id": "handoff-1757249231694-0v92vqvnu",
+      "timestamp": "2025-09-07T12:47:11.694Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 32"
+      ],
+      "nextSteps": [
+        "Step 32"
+      ],
+      "notes": "Notes 32",
+      "id": "handoff-1757249231694-54azscggd",
+      "timestamp": "2025-09-07T12:47:11.694Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 33"
+      ],
+      "nextSteps": [
+        "Step 33"
+      ],
+      "notes": "Notes 33",
+      "id": "handoff-1757249231694-7i7zlxgq9",
+      "timestamp": "2025-09-07T12:47:11.694Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 34"
+      ],
+      "nextSteps": [
+        "Step 34"
+      ],
+      "notes": "Notes 34",
+      "id": "handoff-1757249231695-1lpad680c",
+      "timestamp": "2025-09-07T12:47:11.695Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 35"
+      ],
+      "nextSteps": [
+        "Step 35"
+      ],
+      "notes": "Notes 35",
+      "id": "handoff-1757249231695-lojd294yg",
+      "timestamp": "2025-09-07T12:47:11.695Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 36"
+      ],
+      "nextSteps": [
+        "Step 36"
+      ],
+      "notes": "Notes 36",
+      "id": "handoff-1757249231695-j5a8yt2ib",
+      "timestamp": "2025-09-07T12:47:11.695Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 37"
+      ],
+      "nextSteps": [
+        "Step 37"
+      ],
+      "notes": "Notes 37",
+      "id": "handoff-1757249231695-lhoaesc9c",
+      "timestamp": "2025-09-07T12:47:11.695Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 38"
+      ],
+      "nextSteps": [
+        "Step 38"
+      ],
+      "notes": "Notes 38",
+      "id": "handoff-1757249231695-8ti4qnde2",
+      "timestamp": "2025-09-07T12:47:11.695Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 39"
+      ],
+      "nextSteps": [
+        "Step 39"
+      ],
+      "notes": "Notes 39",
+      "id": "handoff-1757249231696-v9q475n5o",
+      "timestamp": "2025-09-07T12:47:11.696Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 40"
+      ],
+      "nextSteps": [
+        "Step 40"
+      ],
+      "notes": "Notes 40",
+      "id": "handoff-1757249231696-obptx5408",
+      "timestamp": "2025-09-07T12:47:11.696Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 41"
+      ],
+      "nextSteps": [
+        "Step 41"
+      ],
+      "notes": "Notes 41",
+      "id": "handoff-1757249231696-ogxy9sfor",
+      "timestamp": "2025-09-07T12:47:11.696Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 42"
+      ],
+      "nextSteps": [
+        "Step 42"
+      ],
+      "notes": "Notes 42",
+      "id": "handoff-1757249231696-kw8ao9ozu",
+      "timestamp": "2025-09-07T12:47:11.696Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 43"
+      ],
+      "nextSteps": [
+        "Step 43"
+      ],
+      "notes": "Notes 43",
+      "id": "handoff-1757249231696-0zj9e2aa5",
+      "timestamp": "2025-09-07T12:47:11.696Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 44"
+      ],
+      "nextSteps": [
+        "Step 44"
+      ],
+      "notes": "Notes 44",
+      "id": "handoff-1757249231697-ov59hkook",
+      "timestamp": "2025-09-07T12:47:11.697Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 45"
+      ],
+      "nextSteps": [
+        "Step 45"
+      ],
+      "notes": "Notes 45",
+      "id": "handoff-1757249231697-4ppjl4dp2",
+      "timestamp": "2025-09-07T12:47:11.697Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 46"
+      ],
+      "nextSteps": [
+        "Step 46"
+      ],
+      "notes": "Notes 46",
+      "id": "handoff-1757249231697-snz9y0sqk",
+      "timestamp": "2025-09-07T12:47:11.697Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 47"
+      ],
+      "nextSteps": [
+        "Step 47"
+      ],
+      "notes": "Notes 47",
+      "id": "handoff-1757249231697-7hkv85l8u",
+      "timestamp": "2025-09-07T12:47:11.697Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 48"
+      ],
+      "nextSteps": [
+        "Step 48"
+      ],
+      "notes": "Notes 48",
+      "id": "handoff-1757249231697-lutseoegh",
+      "timestamp": "2025-09-07T12:47:11.697Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 49"
+      ],
+      "nextSteps": [
+        "Step 49"
+      ],
+      "notes": "Notes 49",
+      "id": "handoff-1757249231698-ltmxfgbtk",
+      "timestamp": "2025-09-07T12:47:11.698Z"
+    }
+  ]
+}

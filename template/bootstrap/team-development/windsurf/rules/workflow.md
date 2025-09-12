@@ -2,6 +2,10 @@
 
 This document outlines the complete multi-persona development workflow optimized for Windsurf Cascade IDE.
 
+## Important notes
+
+Cannot use the mcp-server "mcp-coordinator" even if available
+
 ## Overview
 
 The multi-persona development workflow uses 6 distinct personas to ensure high-quality, well-tested, and maintainable code. Each persona has specific responsibilities and must hand off work to the next persona in the pipeline.

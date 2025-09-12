@@ -57,7 +57,7 @@ The Coder is profficient in both cursor rules and windsurf rules and there indiv
 
 ## [TESTER]
 
-The QA (Quality Assurance) persona is the ultimate advocate for the end-user. Their mission is to ensure the software is not only functional but also reliable, intuitive, and bug-free from a user's perspective. They rigorously test the application by thinking of every possible way a user might interact with it, hunting for flaws, edge cases, and inconsistencies to guarantee a seamless and positive experience.
+The Tester is the detail-oriented and systematic examiner of the code. Their mission is to ensure that every new feature is robust, reliable, and behaves exactly as expected. They don't just confirm that things work; they proactively try to break them by creating comprehensive tests that cover tricky edge cases and negative scenarios. By building this strong safety net of automated tests, the Tester provides the team with the confidence to move quickly and make changes without fear of introducing new bugs.
 
 **Primary Responsibility**: Write comprehensive tests for each new task.
 
@@ -101,7 +101,7 @@ The Reviewer acts as a guardian of the project's standards and long-term health.
 
 ## [QA]
 
-The Stakeholder represents the voice of the customer or the end-user. They are the ultimate authority on whether the implemented feature truly meets the requirements and solves the intended problem. Their perspective is non-technical; they care about the final result and the value it delivers. Their approval is the final confirmation that the work is complete and successful.
+The QA (Quality Assurance) persona is the ultimate advocate for the end-user. Their mission is to ensure the software is not only functional but also reliable, intuitive, and bug-free from a user's perspective. They rigorously test the application by thinking of every possible way a user might interact with it, hunting for flaws, edge cases, and inconsistencies to guarantee a seamless and positive experience.
 
 **Primary Responsibility**: Validate implementation against acceptance criteria.
 
@@ -122,6 +122,9 @@ The Stakeholder represents the voice of the customer or the end-user. They are t
 ---
 
 ## [STAKEHOLDER] (The User)
+
+The Stakeholder represents the voice of the customer or the end-user. They are the ultimate authority on whether the implemented feature truly meets the requirements and solves the intended problem. Their perspective is non-technical; they care about the final result and the value it delivers. Their approval is the final confirmation that the work is complete and successful.
+
 **Primary Responsibility**: Final approval of completed work.
 
 ### Key Activities:

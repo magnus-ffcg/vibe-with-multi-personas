@@ -1,0 +1,104 @@
+{
+  "currentPersona": "TESTER",
+  "tasks": [
+    {
+      "title": "Design API endpoints",
+      "description": "Design RESTful API endpoints for the application",
+      "status": "tested",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "All endpoints documented",
+        "Response schemas defined",
+        "Error handling specified"
+      ],
+      "id": "task-1757249607564-4whhqqsnu",
+      "createdAt": "2025-09-07T12:53:27.564Z",
+      "updatedAt": "2025-09-07T12:53:27.572Z",
+      "assignedPersona": "TESTER"
+    },
+    {
+      "title": "Implement authentication",
+      "description": "Implement user authentication system",
+      "status": "backlog",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "JWT token implementation",
+        "Password hashing",
+        "Login/logout endpoints"
+      ],
+      "id": "task-1757249607567-jevkbk7h2",
+      "createdAt": "2025-09-07T12:53:27.567Z",
+      "updatedAt": "2025-09-07T12:53:27.567Z"
+    }
+  ],
+  "handOffs": [
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "taskId": "task-1757249607564-4whhqqsnu",
+      "completedWork": [
+        "API endpoints designed",
+        "Database schema created",
+        "Architecture documentation updated"
+      ],
+      "nextSteps": [
+        "Implement API endpoints",
+        "Set up database connections",
+        "Create middleware for authentication"
+      ],
+      "notes": "All design work completed. Ready for implementation.",
+      "id": "handoff-1757249607570-n5sczbc4a",
+      "timestamp": "2025-09-07T12:53:27.570Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "taskId": "task-1757249607564-4whhqqsnu",
+      "completedWork": [
+        "API endpoints implemented",
+        "Database integration complete",
+        "Unit tests written"
+      ],
+      "nextSteps": [
+        "Run integration tests",
+        "Test API endpoints",
+        "Verify error handling"
+      ],
+      "notes": "Implementation complete. All unit tests passing.",
+      "testStatus": "passing",
+      "testRunSummary": "15/15 unit tests passing",
+      "id": "handoff-1757249607571-am569pph3",
+      "timestamp": "2025-09-07T12:53:27.571Z"
+    }
+  ],
+  "plan": {
+    "id": "plan-1",
+    "title": "Integration Test Project",
+    "description": "A project to test the complete workflow",
+    "architecture": {
+      "overview": "Simple web application",
+      "components": [
+        "Frontend",
+        "Backend",
+        "Database"
+      ],
+      "decisions": [
+        "Use TypeScript",
+        "Use Node.js",
+        "Use PostgreSQL"
+      ]
+    },
+    "requirements": [
+      "User authentication",
+      "Data persistence",
+      "REST API"
+    ],
+    "constraints": [
+      "Must be completed in 2 weeks",
+      "Budget limit: $10,000"
+    ],
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-01T00:00:00Z"
+  },
+  "activeTaskId": "task-1757249607564-4whhqqsnu"
+}

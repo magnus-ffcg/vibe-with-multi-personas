@@ -14,6 +14,10 @@ All requests begin with the **[ARCHITECT]** and flow through a structured pipeli
 Backlog → In Progress → Coded → Tested → Reviewed → QA → Ready for Stakeholder → Complete
 ```
 
+## Important notes
+
+Cannot use the mcp-server "mcp-coordinator" even if available
+
 ## Detailed Workflow Steps
 
 ### 1. Architecture Phase

@@ -1,0 +1,413 @@
+{
+  "currentPersona": "REVIEWER",
+  "tasks": [
+    {
+      "title": "Test Task",
+      "description": "Description",
+      "status": "backlog",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Criteria"
+      ],
+      "id": "task-1757248885704-xw72nimt2",
+      "createdAt": "2025-09-07T12:41:25.704Z",
+      "updatedAt": "2025-09-07T12:41:25.706Z"
+    },
+    {
+      "title": "Test Task",
+      "description": "Test Description",
+      "acceptanceCriteria": [
+        "Criteria 1",
+        "Criteria 2"
+      ],
+      "priority": "high",
+      "status": "backlog",
+      "id": "task-1757248885723-5xzxz3o9z",
+      "createdAt": "2025-09-07T12:41:25.723Z",
+      "updatedAt": "2025-09-07T12:41:25.723Z"
+    },
+    {
+      "title": "Original Task",
+      "description": "Description",
+      "status": "in_progress",
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Criteria"
+      ],
+      "id": "task-1757248885725-k13kx3qz5",
+      "createdAt": "2025-09-07T12:41:25.725Z",
+      "updatedAt": "2025-09-07T12:41:25.726Z",
+      "assignedPersona": "CODER"
+    },
+    {
+      "title": "Serialization Task",
+      "description": "Testing task serialization",
+      "status": "backlog",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Criteria A",
+        "Criteria B"
+      ],
+      "id": "task-1757248885736-2b626nbu9",
+      "createdAt": "2025-09-07T12:41:25.736Z",
+      "updatedAt": "2025-09-07T12:41:25.736Z"
+    },
+    {
+      "title": "Test Task",
+      "description": "Description",
+      "status": "backlog",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Criteria"
+      ],
+      "id": "task-1757248950904-9aeo5cjeq",
+      "createdAt": "2025-09-07T12:42:30.904Z",
+      "updatedAt": "2025-09-07T12:42:30.906Z"
+    },
+    {
+      "title": "Test Task",
+      "description": "Test Description",
+      "acceptanceCriteria": [
+        "Criteria 1",
+        "Criteria 2"
+      ],
+      "priority": "high",
+      "status": "backlog",
+      "id": "task-1757248950924-x12vcgtcu",
+      "createdAt": "2025-09-07T12:42:30.924Z",
+      "updatedAt": "2025-09-07T12:42:30.924Z"
+    },
+    {
+      "title": "Original Task",
+      "description": "Description",
+      "status": "in_progress",
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Criteria"
+      ],
+      "id": "task-1757248950926-qg7mli325",
+      "createdAt": "2025-09-07T12:42:30.926Z",
+      "updatedAt": "2025-09-07T12:42:30.926Z",
+      "assignedPersona": "CODER"
+    },
+    {
+      "title": "Serialization Task",
+      "description": "Testing task serialization",
+      "status": "backlog",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Criteria A",
+        "Criteria B"
+      ],
+      "id": "task-1757248950940-a5bysb14y",
+      "createdAt": "2025-09-07T12:42:30.940Z",
+      "updatedAt": "2025-09-07T12:42:30.940Z"
+    },
+    {
+      "title": "Test Task",
+      "description": "Description",
+      "status": "backlog",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Criteria"
+      ],
+      "id": "task-1757248998130-3pqbi85pi",
+      "createdAt": "2025-09-07T12:43:18.130Z",
+      "updatedAt": "2025-09-07T12:43:18.131Z"
+    },
+    {
+      "title": "Test Task",
+      "description": "Test Description",
+      "acceptanceCriteria": [
+        "Criteria 1",
+        "Criteria 2"
+      ],
+      "priority": "high",
+      "status": "backlog",
+      "id": "task-1757248998155-0q1xygomt",
+      "createdAt": "2025-09-07T12:43:18.155Z",
+      "updatedAt": "2025-09-07T12:43:18.155Z"
+    },
+    {
+      "title": "Original Task",
+      "description": "Description",
+      "status": "in_progress",
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Criteria"
+      ],
+      "id": "task-1757248998157-ssn6po8tv",
+      "createdAt": "2025-09-07T12:43:18.157Z",
+      "updatedAt": "2025-09-07T12:43:18.157Z",
+      "assignedPersona": "CODER"
+    },
+    {
+      "title": "Serialization Task",
+      "description": "Testing task serialization",
+      "status": "backlog",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Criteria A",
+        "Criteria B"
+      ],
+      "id": "task-1757248998176-61xa9h743",
+      "createdAt": "2025-09-07T12:43:18.176Z",
+      "updatedAt": "2025-09-07T12:43:18.176Z"
+    }
+  ],
+  "handOffs": [
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work done"
+      ],
+      "nextSteps": [
+        "Next steps"
+      ],
+      "notes": "Notes",
+      "id": "handoff-1757248885708-w3dr5mr6s",
+      "timestamp": "2025-09-07T12:41:25.708Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 1"
+      ],
+      "nextSteps": [
+        "Step 1"
+      ],
+      "notes": "Notes 1",
+      "id": "handoff-1757248885709-qzyanwu5l",
+      "timestamp": "2025-09-07T12:41:25.709Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 2"
+      ],
+      "nextSteps": [
+        "Step 2"
+      ],
+      "notes": "Notes 2",
+      "id": "handoff-1757248885710-npbcwln4j",
+      "timestamp": "2025-09-07T12:41:25.710Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "taskId": "task-1",
+      "completedWork": [
+        "Work 1",
+        "Work 2"
+      ],
+      "nextSteps": [
+        "Step 1",
+        "Step 2"
+      ],
+      "notes": "Handoff notes",
+      "blockers": [
+        "Blocker 1"
+      ],
+      "id": "handoff-1757248885727-jv46qkpn8",
+      "timestamp": "2025-09-07T12:41:25.727Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work A",
+        "Work B"
+      ],
+      "nextSteps": [
+        "Step A",
+        "Step B"
+      ],
+      "notes": "Serialization test notes",
+      "blockers": [
+        "Blocker A"
+      ],
+      "id": "handoff-1757248885740-95fgiav0g",
+      "timestamp": "2025-09-07T12:41:25.740Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work done"
+      ],
+      "nextSteps": [
+        "Next steps"
+      ],
+      "notes": "Notes",
+      "id": "handoff-1757248950916-000ak1gcy",
+      "timestamp": "2025-09-07T12:42:30.916Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 1"
+      ],
+      "nextSteps": [
+        "Step 1"
+      ],
+      "notes": "Notes 1",
+      "id": "handoff-1757248950917-1pl3pob16",
+      "timestamp": "2025-09-07T12:42:30.917Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 2"
+      ],
+      "nextSteps": [
+        "Step 2"
+      ],
+      "notes": "Notes 2",
+      "id": "handoff-1757248950918-si2gdyzwl",
+      "timestamp": "2025-09-07T12:42:30.918Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "taskId": "task-1",
+      "completedWork": [
+        "Work 1",
+        "Work 2"
+      ],
+      "nextSteps": [
+        "Step 1",
+        "Step 2"
+      ],
+      "notes": "Handoff notes",
+      "blockers": [
+        "Blocker 1"
+      ],
+      "id": "handoff-1757248950932-6czr0t0zp",
+      "timestamp": "2025-09-07T12:42:30.932Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work A",
+        "Work B"
+      ],
+      "nextSteps": [
+        "Step A",
+        "Step B"
+      ],
+      "notes": "Serialization test notes",
+      "blockers": [
+        "Blocker A"
+      ],
+      "id": "handoff-1757248950943-1hn4apisu",
+      "timestamp": "2025-09-07T12:42:30.943Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work done"
+      ],
+      "nextSteps": [
+        "Next steps"
+      ],
+      "notes": "Notes",
+      "id": "handoff-1757248998142-xlp9rttqf",
+      "timestamp": "2025-09-07T12:43:18.142Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work 1"
+      ],
+      "nextSteps": [
+        "Step 1"
+      ],
+      "notes": "Notes 1",
+      "id": "handoff-1757248998144-j5iq4zgch",
+      "timestamp": "2025-09-07T12:43:18.144Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "completedWork": [
+        "Work 2"
+      ],
+      "nextSteps": [
+        "Step 2"
+      ],
+      "notes": "Notes 2",
+      "id": "handoff-1757248998144-topbhuwcw",
+      "timestamp": "2025-09-07T12:43:18.144Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "taskId": "task-1",
+      "completedWork": [
+        "Work 1",
+        "Work 2"
+      ],
+      "nextSteps": [
+        "Step 1",
+        "Step 2"
+      ],
+      "notes": "Handoff notes",
+      "blockers": [
+        "Blocker 1"
+      ],
+      "id": "handoff-1757248998159-g4hpv9868",
+      "timestamp": "2025-09-07T12:43:18.159Z"
+    },
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "completedWork": [
+        "Work A",
+        "Work B"
+      ],
+      "nextSteps": [
+        "Step A",
+        "Step B"
+      ],
+      "notes": "Serialization test notes",
+      "blockers": [
+        "Blocker A"
+      ],
+      "id": "handoff-1757248998178-8prjpufop",
+      "timestamp": "2025-09-07T12:43:18.178Z"
+    }
+  ],
+  "plan": {
+    "id": "plan-1",
+    "title": "Serialization Test",
+    "description": "Testing JSON serialization",
+    "architecture": {
+      "overview": "Test architecture",
+      "components": [
+        "Component A",
+        "Component B"
+      ],
+      "decisions": [
+        "Decision A",
+        "Decision B"
+      ]
+    },
+    "requirements": [
+      "Requirement A",
+      "Requirement B"
+    ],
+    "constraints": [
+      "Constraint A"
+    ],
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-01T00:00:00Z"
+  }
+}

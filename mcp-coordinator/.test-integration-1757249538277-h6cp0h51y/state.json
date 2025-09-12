@@ -1,0 +1,82 @@
+{
+  "currentPersona": "CODER",
+  "tasks": [
+    {
+      "title": "Implement user registration",
+      "description": "Create user registration functionality",
+      "status": "coded",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "User can register with email and password",
+        "Duplicate email validation",
+        "Password strength validation"
+      ],
+      "id": "task-1757249538279-99qjqwbqf",
+      "createdAt": "2025-09-07T12:52:18.279Z",
+      "updatedAt": "2025-09-07T12:52:18.287Z",
+      "assignedPersona": "CODER"
+    }
+  ],
+  "handOffs": [
+    {
+      "fromPersona": "TEST_ARCHITECT",
+      "toPersona": "TEST_WRITER",
+      "taskId": "task-1757249538279-99qjqwbqf",
+      "completedWork": [
+        "Test scenarios identified",
+        "Test cases designed",
+        "Acceptance criteria refined"
+      ],
+      "nextSteps": [
+        "Write failing tests",
+        "Set up test fixtures",
+        "Implement test helpers"
+      ],
+      "notes": "All test scenarios documented. Ready for test implementation.",
+      "id": "handoff-1757249538281-7ke96h4qh",
+      "timestamp": "2025-09-07T12:52:18.281Z"
+    },
+    {
+      "fromPersona": "TEST_WRITER",
+      "toPersona": "CODER",
+      "taskId": "task-1757249538279-99qjqwbqf",
+      "completedWork": [
+        "All tests written",
+        "Test fixtures created",
+        "Test helpers implemented"
+      ],
+      "nextSteps": [
+        "Implement user registration logic",
+        "Make tests pass",
+        "Ensure all edge cases covered"
+      ],
+      "notes": "Tests are failing as expected. Ready for implementation.",
+      "testStatus": "failing",
+      "testRunSummary": "0/12 tests passing - all failing as expected",
+      "id": "handoff-1757249538284-6442tj5d9",
+      "timestamp": "2025-09-07T12:52:18.284Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "STAKEHOLDER",
+      "taskId": "task-1757249538279-99qjqwbqf",
+      "completedWork": [
+        "User registration implemented",
+        "All tests now passing",
+        "Edge cases handled"
+      ],
+      "nextSteps": [
+        "Review implementation",
+        "Approve for production",
+        "Plan next iteration"
+      ],
+      "notes": "Implementation complete. All tests passing.",
+      "testStatus": "passing",
+      "testRunSummary": "12/12 tests passing",
+      "id": "handoff-1757249538287-3kgk6h2jl",
+      "timestamp": "2025-09-07T12:52:18.287Z"
+    }
+  ],
+  "currentStage": "green",
+  "activeTaskId": "task-1757249538279-99qjqwbqf"
+}

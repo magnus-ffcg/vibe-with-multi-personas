@@ -2,6 +2,10 @@
 
 This document defines the complete workflow process for mob programming using the 6-persona system.
 
+## Important notes
+
+All mcp-server calls to mcp-coordinator includes corpus_name
+
 ## Workflow Pipeline
 
 ```

@@ -1,0 +1,57 @@
+{
+  "currentPersona": "REVIEWER",
+  "tasks": [
+    {
+      "title": "Persistence Task",
+      "description": "Test task persistence",
+      "status": "in_progress",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Criteria A"
+      ],
+      "id": "task-1757249500320-40r01z4it",
+      "createdAt": "2025-09-07T12:51:40.320Z",
+      "updatedAt": "2025-09-07T12:51:40.320Z"
+    }
+  ],
+  "handOffs": [
+    {
+      "fromPersona": "ARCHITECT",
+      "toPersona": "CODER",
+      "taskId": "task-1757249500320-40r01z4it",
+      "completedWork": [
+        "Work A"
+      ],
+      "nextSteps": [
+        "Step A"
+      ],
+      "notes": "Notes A",
+      "id": "handoff-1757249500321-fg329khum",
+      "timestamp": "2025-09-07T12:51:40.321Z"
+    }
+  ],
+  "plan": {
+    "id": "plan-1",
+    "title": "Persistence Test",
+    "description": "Testing data persistence",
+    "architecture": {
+      "overview": "Test architecture",
+      "components": [
+        "Component A"
+      ],
+      "decisions": [
+        "Decision A"
+      ]
+    },
+    "requirements": [
+      "Requirement A"
+    ],
+    "constraints": [
+      "Constraint A"
+    ],
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-01T00:00:00Z"
+  },
+  "currentStage": "refactor",
+  "activeTaskId": "task-1757249500320-40r01z4it"
+}

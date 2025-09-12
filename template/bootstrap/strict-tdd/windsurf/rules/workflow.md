@@ -6,6 +6,10 @@ trigger: always_on
 
 This document defines the workflow process for our strict TDD approach with architectural planning and TDD stage transitions.
 
+## Important notes
+
+Cannot use the mcp-server "mcp-coordinator" even if available
+
 ## Workflow Overview
 
 All requests begin with the **[ARCHITECT]** and flow through the strict Red-Green-Refactor cycle:

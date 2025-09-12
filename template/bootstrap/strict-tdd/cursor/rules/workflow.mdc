@@ -2,6 +2,10 @@
 
 This document defines the workflow process for our strict TDD approach using a single persona transitioning through TDD stages.
 
+## Important notes
+
+Cannot use the mcp-server "mcp-coordinator" even if available
+
 ## Workflow Overview
 
 All requests begin with the **[TDD_DEVELOPER - RED]** and follow the strict Red-Green-Refactor cycle:

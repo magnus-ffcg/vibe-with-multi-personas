@@ -6,10 +6,13 @@ import { WorkflowState, Task, HandOff, Plan } from './types.js';
 export class SimpleWorkflowStorage {
   private stateFile: string;
   private state: WorkflowState;
+  private projectId: string;
 
-  constructor() {
-    // Single temporary file for all state
-    this.stateFile = join(tmpdir(), 'mcp-coordinator-state.json');
+  constructor(projectId?: string) {
+    // Use project-specific state file for isolation
+    this.projectId = projectId || 'default';
+    const safeProjectId = this.projectId.replace(/[^a-zA-Z0-9-_]/g, '_');
+    this.stateFile = join(tmpdir(), `mcp-coordinator-${safeProjectId}.json`);
     this.state = {
       currentPersona: 'ARCHITECT',
       tasks: [],
@@ -17,8 +20,8 @@ export class SimpleWorkflowStorage {
     };
   }
 
-  static async create(): Promise<SimpleWorkflowStorage> {
-    const storage = new SimpleWorkflowStorage();
+  static async create(projectId?: string): Promise<SimpleWorkflowStorage> {
+    const storage = new SimpleWorkflowStorage(projectId);
     await storage.initialize();
     return storage;
   }
@@ -123,6 +126,11 @@ export class SimpleWorkflowStorage {
   // Get temp file path for debugging
   getStateFilePath(): string {
     return this.stateFile;
+  }
+
+  // Get project ID
+  getProjectId(): string {
+    return this.projectId;
   }
 
   // Cleanup method for tests

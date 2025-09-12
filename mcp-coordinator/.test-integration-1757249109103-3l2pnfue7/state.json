@@ -1,0 +1,77 @@
+{
+  "currentPersona": "ARCHITECT",
+  "tasks": [
+    {
+      "title": "Frontend development",
+      "description": "Build user interface",
+      "status": "in_progress",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Responsive design",
+        "Accessibility compliance"
+      ],
+      "id": "task-1757249109103-lzhpus3ks",
+      "createdAt": "2025-09-07T12:45:09.103Z",
+      "updatedAt": "2025-09-07T12:45:09.105Z",
+      "assignedPersona": "CODER"
+    },
+    {
+      "title": "Backend API",
+      "description": "Develop REST API",
+      "status": "in_progress",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "All endpoints implemented",
+        "Documentation complete"
+      ],
+      "id": "task-1757249109103-77mi1ks5d",
+      "createdAt": "2025-09-07T12:45:09.103Z",
+      "updatedAt": "2025-09-07T12:45:09.105Z",
+      "assignedPersona": "CODER"
+    },
+    {
+      "title": "Database setup",
+      "description": "Set up database schema",
+      "status": "coded",
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Schema created",
+        "Migrations ready"
+      ],
+      "id": "task-1757249109104-8umd92d0w",
+      "createdAt": "2025-09-07T12:45:09.104Z",
+      "updatedAt": "2025-09-07T12:45:09.105Z",
+      "assignedPersona": "CODER"
+    }
+  ],
+  "handOffs": [
+    {
+      "fromPersona": "CODER",
+      "toPersona": "TESTER",
+      "taskId": "task-1757249109104-8umd92d0w",
+      "completedWork": [
+        "Database schema implemented"
+      ],
+      "nextSteps": [
+        "Test database operations"
+      ],
+      "notes": "Database setup complete",
+      "id": "handoff-1757249109106-0o4rokk5a",
+      "timestamp": "2025-09-07T12:45:09.106Z"
+    },
+    {
+      "fromPersona": "CODER",
+      "toPersona": "REVIEWER",
+      "taskId": "task-1757249109103-lzhpus3ks",
+      "completedWork": [
+        "Frontend components created"
+      ],
+      "nextSteps": [
+        "Review code quality"
+      ],
+      "notes": "Frontend ready for review",
+      "id": "handoff-1757249109106-0i7k29ody",
+      "timestamp": "2025-09-07T12:45:09.106Z"
+    }
+  ]
+}

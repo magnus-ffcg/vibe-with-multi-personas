@@ -24,8 +24,20 @@ const server = new Server(
   }
 );
 
-// Storage will be initialized with project-specific isolation
-let storage: SimpleWorkflowStorage;
+// Storage instances per project
+const storageInstances = new Map<string, SimpleWorkflowStorage>();
+
+// Get or create storage for a project
+async function getStorage(corpusName?: string): Promise<SimpleWorkflowStorage> {
+  const projectId = corpusName || 'default';
+  
+  if (!storageInstances.has(projectId)) {
+    const storage = await SimpleWorkflowStorage.create(projectId);
+    storageInstances.set(projectId, storage);
+  }
+  
+  return storageInstances.get(projectId)!;
+}
 
 // List available resources
 server.setRequestHandler(ListResourcesRequestSchema, async () => {
@@ -63,6 +75,10 @@ server.setRequestHandler(ListResourcesRequestSchema, async () => {
 server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
   const uri = request.params.uri;
   
+  // For resources, we'll use default project for now
+  // TODO: Consider adding project scoping to resource URIs
+  const storage = await getStorage();
+  
   let content;
   switch (uri) {
     case 'workflow://plan':
@@ -81,12 +97,32 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
       throw new Error(`Unknown resource: ${uri}`);
   }
 
+  // Ensure content is not undefined - provide default values
+  if (content === undefined || content === null) {
+    switch (uri) {
+      case 'workflow://plan':
+        content = null;
+        break;
+      case 'workflow://backlog':
+        content = [];
+        break;
+      case 'workflow://handoffs':
+        content = null;
+        break;
+      case 'workflow://handoffs/history':
+        content = [];
+        break;
+    }
+  }
+
+  const textContent = JSON.stringify(content, null, 2);
+  
   return {
     contents: [
       {
         uri,
         mimeType: 'application/json',
-        text: JSON.stringify(content, null, 2)
+        text: textContent
       }
     ]
   };
@@ -106,7 +142,8 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             description: { type: 'string', description: 'Plan description' },
             requirements: { type: 'array', items: { type: 'string' }, description: 'Requirements list' },
             architecture: { type: 'object', description: 'Architecture object with overview, components, and decisions' },
-            constraints: { type: 'array', items: { type: 'string' }, description: 'Project constraints' }
+            constraints: { type: 'array', items: { type: 'string' }, description: 'Project constraints' },
+            corpus_name: { type: 'string', description: 'Project corpus name for isolation' }
           },
           required: ['title', 'description']
         }
@@ -121,6 +158,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             description: { type: 'string', description: 'Task description' },
             acceptanceCriteria: { type: 'array', items: { type: 'string' }, description: 'Acceptance criteria' },
             priority: { type: 'string', enum: ['high', 'medium', 'low'], description: 'Task priority' },
+            corpus_name: { type: 'string', description: 'Project corpus name for isolation' }
           },
           required: ['title', 'description', 'acceptanceCriteria', 'priority'],
         },
@@ -135,6 +173,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             status: { type: 'string', enum: ['backlog', 'in_progress', 'coded', 'tested', 'reviewed', 'qa', 'ready_for_stakeholder', 'complete'], description: 'New status' },
             assignedPersona: { type: 'string', description: 'Assigned persona' },
             notes: { type: 'string', description: 'Update notes' },
+            corpus_name: { type: 'string', description: 'Project corpus name for isolation' }
           },
           required: ['taskId'],
         },
@@ -152,6 +191,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             nextSteps: { type: 'array', items: { type: 'string' }, description: 'What needs to be done next' },
             notes: { type: 'string', description: 'Additional notes' },
             blockers: { type: 'array', items: { type: 'string' }, description: 'Any blockers encountered' },
+            corpus_name: { type: 'string', description: 'Project corpus name for isolation' }
           },
           required: ['fromPersona', 'toPersona', 'taskId', 'completedWork', 'nextSteps'],
         },
@@ -161,7 +201,9 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
         description: 'Get the current active persona',
         inputSchema: {
           type: 'object',
-          properties: {},
+          properties: {
+            corpus_name: { type: 'string', description: 'Project corpus name for isolation' }
+          },
         },
       },
       {
@@ -171,6 +213,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           type: 'object',
           properties: {
             persona: { type: 'string', description: 'Persona name' },
+            corpus_name: { type: 'string', description: 'Project corpus name for isolation' }
           },
           required: ['persona'],
         },
@@ -185,6 +228,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
   switch (name) {
     case 'create_plan': {
+      const storage = await getStorage(args.corpus_name as string);
       const plan: Plan = {
         id: Date.now().toString(),
         title: args.title as string,
@@ -200,6 +244,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     case 'add_task': {
+      const storage = await getStorage(args.corpus_name as string);
       const task = {
         id: `task-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         title: args.title as string,
@@ -215,6 +260,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     case 'update_task': {
+      const storage = await getStorage(args.corpus_name as string);
       await storage.updateTask(args.taskId as string, {
         status: args.status as any,
         assignedPersona: args.assignedPersona as string,
@@ -228,6 +274,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     case 'create_handoff': {
+      const storage = await getStorage(args.corpus_name as string);
       const handoff = {
         id: `handoff-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         fromPersona: args.fromPersona as string,
@@ -244,11 +291,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     case 'get_current_persona': {
+      const storage = await getStorage(args.corpus_name as string);
       const persona = await storage.getCurrentPersona();
       return { content: [{ type: 'text', text: persona || 'No current persona set' }] };
     }
 
     case 'set_current_persona': {
+      const storage = await getStorage(args.corpus_name as string);
       await storage.setCurrentPersona(args.persona as string);
       return { content: [{ type: 'text', text: `Current persona set to: ${args.persona}` }] };
     }
@@ -259,11 +308,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 });
 
 async function main() {
-  // Initialize simple storage
-  storage = await SimpleWorkflowStorage.create();
-  
   console.error(`MCP Coordinator Server starting...`);
-  console.error(`State file: ${storage.getStateFilePath()}`);
+  console.error(`Multi-project support enabled`);
   
   // Debug mode
   if (process.env.DEBUG_MCP_COORDINATOR) {
